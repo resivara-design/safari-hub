@@ -11,8 +11,8 @@ export const metadata: Metadata = {
 const zones = [
   { zone: "London & South East", timeframe: "1-2 working days", fee: "£3.99 (free over £30)" },
   { zone: "Rest of England & Wales", timeframe: "2-4 working days", fee: "£4.99 (free over £30)" },
-  { zone: "Scotland", timeframe: "3-5 working days", fee: "£5.99 (free over £40)" },
-  { zone: "Northern Ireland", timeframe: "3-6 working days", fee: "£5.99 (free over £40)" },
+  { zone: "Scotland", timeframe: "3-5 working days", fee: "£5.99 (free over £15)" },
+  { zone: "Northern Ireland", timeframe: "3-6 working days", fee: "£5.99 (free over £15)" },
 ];
 
 export default function DeliveryPage() {

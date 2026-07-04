@@ -111,6 +111,9 @@ export default function Footer() {
           </form>
           <div className="mt-2 flex flex-col gap-1 text-sm text-cream/70">
             <a href={`mailto:${site.contactEmail}`} className="rounded hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal">{site.contactEmail}</a>
+            <a href={site.phoneLink} className="rounded hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal">
+              {site.phoneNumber}
+            </a>
             <a href={site.whatsappLink} target="_blank" rel="noreferrer" className="rounded hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal">
               WhatsApp: {site.whatsappNumber}
             </a>

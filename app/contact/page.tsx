@@ -27,6 +27,12 @@ export default function ContactPage() {
             </a>
           </div>
           <div className="rounded-2xl border border-brown/10 bg-ivory p-6">
+            <h2 className="font-heading text-xl text-ink">Phone</h2>
+            <a href={site.phoneLink} className="text-deep-green hover:underline">
+              {site.phoneNumber}
+            </a>
+          </div>
+          <div className="rounded-2xl border border-brown/10 bg-ivory p-6">
             <h2 className="font-heading text-xl text-ink">WhatsApp</h2>
             <a
               href={site.whatsappLink}

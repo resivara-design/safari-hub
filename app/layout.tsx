@@ -55,6 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     url: site.url,
     description: site.description,
     email: site.contactEmail,
+    telephone: site.phoneNumber,
   };
 
   const websiteJsonLd = {

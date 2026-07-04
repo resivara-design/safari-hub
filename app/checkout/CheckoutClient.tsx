@@ -10,6 +10,7 @@ import ProductImage from "@/components/product/ProductImage";
 import FreeDeliveryBadge from "@/components/ui/FreeDeliveryBadge";
 import { formatPrice } from "@/lib/format";
 import { processCheckout } from "@/lib/payments";
+import { site } from "@/lib/site";
 import type { CheckoutCustomer } from "@/lib/payments/types";
 import type { ProductImagePlaceholder as ImagePlaceholderConfig } from "@/types/product";
 
@@ -83,6 +84,20 @@ export default function CheckoutClient() {
           <Button href="/shop" variant="primary" size="lg">
             Continue Shopping
           </Button>
+        </div>
+        <div className="mt-8 rounded-2xl border border-brown/10 bg-ivory p-6 text-sm text-brown">
+          <p className="font-heading text-base text-ink">Questions about your order?</p>
+          <div className="mt-2 flex flex-col gap-1">
+            <a href={`mailto:${site.contactEmail}`} className="text-deep-green hover:underline">
+              {site.contactEmail}
+            </a>
+            <a href={site.phoneLink} className="text-deep-green hover:underline">
+              {site.phoneNumber}
+            </a>
+            <a href={site.whatsappLink} target="_blank" rel="noreferrer" className="text-deep-green hover:underline">
+              WhatsApp: {site.whatsappNumber}
+            </a>
+          </div>
         </div>
       </div>
     );

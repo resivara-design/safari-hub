@@ -6,11 +6,11 @@ interface BadgeProps {
 
 const toneClasses: Record<NonNullable<BadgeProps["tone"]>, string> = {
   gold: "bg-gold/15 text-gold-dark",
-  green: "bg-deep-green/10 text-deep-green",
+  green: "bg-charcoal/10 text-charcoal",
   orange: "bg-burnt-orange/10 text-burnt-orange-dark",
   neutral: "bg-brown/10 text-brown",
   "gold-solid": "bg-gold text-ink shadow-sm",
-  "green-solid": "bg-deep-green text-cream shadow-sm",
+  "green-solid": "bg-charcoal text-cream shadow-sm",
 };
 
 export default function Badge({ children, tone = "neutral", className = "" }: BadgeProps) {

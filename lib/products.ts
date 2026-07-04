@@ -17,6 +17,9 @@ import type { Product } from "@/types/product";
  *                        brand color tokens (gold, deep-green, burnt-orange, brown,
  *                        cream, each with optional -light/-dark), icon picks the
  *                        motif drawn on the tile
+ *
+ * Order below is grouped by packaging/product tone (brown, warm orange, green, gold)
+ * so similar-looking items sit next to each other in the grid.
  */
 export const products: Product[] = [
   {
@@ -34,6 +37,48 @@ export const products: Product[] = [
     photo: "/images/products/bitter-kola.jpg",
   },
   {
+    slug: "black-pepper",
+    name: "Black Peppercorn",
+    category: "spices-and-seasoning",
+    price: 4.99,
+    weight: "100g",
+    shortDescription: "Whole black peppercorns with a sharp, warming bite.",
+    longDescription:
+      "Full-bodied and pungent, our whole black peppercorns are graded for size and freshness. Grind them fresh for the fullest flavour in any dish.",
+    inStock: true,
+    featured: false,
+    image: { colorFrom: "brown", colorTo: "ink", icon: "pepper" },
+    photo: "/images/products/black-pepper.jpg",
+  },
+  {
+    slug: "kilishi",
+    name: "Kilishi",
+    category: "snacks",
+    price: 7.99,
+    weight: "100g",
+    shortDescription: "Spiced, sun-dried beef strips with a bold peppery crust.",
+    longDescription:
+      "Kilishi is thinly sliced beef, marinated in a peanut and pepper spice paste, then sun-dried to a chewy, deeply savoury finish. A West African classic snack, best enjoyed straight from the pack or warmed through.",
+    inStock: true,
+    featured: true,
+    bestSeller: true,
+    image: { colorFrom: "brown", colorTo: "ink", icon: "seed" },
+    photo: "/images/products/kilishi.jpg",
+  },
+  {
+    slug: "ground-ogbono",
+    name: "Ground Ogbono",
+    category: "soup-ingredients",
+    price: 7.99,
+    weight: "250g",
+    shortDescription: "Ground ogbono seeds for a rich, silky draw soup.",
+    longDescription:
+      "Milled from wild mango seeds, our ground ogbono releases a distinctive silky texture as it simmers, giving draw soup its signature body. A little goes a long way in building a rich, hearty pot.",
+    inStock: true,
+    image: { colorFrom: "brown-light", colorTo: "brown", icon: "grain" },
+    photo: "/images/products/ground-ogbono.jpg",
+  },
+  {
     slug: "alligator-pepper",
     name: "Alligator Pepper",
     category: "nuts-and-kola",
@@ -48,18 +93,32 @@ export const products: Product[] = [
     photo: "/images/products/alligator-pepper.jpg",
   },
   {
-    slug: "dry-bitter-leaf",
-    name: "Dry Bitter Leaf",
-    category: "dried-leaves-and-herbs",
-    price: 3.99,
+    slug: "suya-spice",
+    name: "Suya Spice Blend",
+    category: "spices-and-seasoning",
+    price: 4.99,
     weight: "100g",
-    shortDescription: "Sun-dried bitter leaf, washed and ready for your pot.",
+    shortDescription: "Smoky peanut-based seasoning built for the grill.",
     longDescription:
-      "Sun-dried and cleaned to save you the work, our bitter leaf rehydrates beautifully for soups and stews. A little goes a long way, with that unmistakable earthy bite.",
+      "Our suya spice blends roasted ground peanuts with a fiery mix of chillies and warming spices, just like the street-side grills back home. Rub it onto skewers or roasted vegetables for that unmistakable smoky heat.",
     inStock: true,
     featured: true,
-    image: { colorFrom: "deep-green", colorTo: "deep-green-dark", icon: "leaf" },
-    photo: "/images/products/dry-bitter-leaf.jpg",
+    image: { colorFrom: "burnt-orange", colorTo: "brown-dark", icon: "jar" },
+    photo: "/images/products/suya-spice.jpg",
+  },
+  {
+    slug: "cayenne-pepper",
+    name: "Cayenne Pepper",
+    category: "spices-and-seasoning",
+    price: 3.99,
+    weight: "100g",
+    shortDescription: "Ground cayenne with a clean, steady heat.",
+    longDescription:
+      "Our cayenne pepper is dried and finely ground for a clean, consistent heat that works into any dish. A pantry essential for seasoning, marinades and sauces.",
+    inStock: true,
+    isNew: true,
+    image: { colorFrom: "burnt-orange-light", colorTo: "burnt-orange", icon: "pepper" },
+    photo: "/images/products/cayenne-pepper.jpg",
   },
   {
     slug: "hibiscus-flower",
@@ -76,18 +135,31 @@ export const products: Product[] = [
     photo: "/images/products/hibiscus.jpg",
   },
   {
-    slug: "black-pepper",
-    name: "Black Peppercorn",
-    category: "spices-and-seasoning",
-    price: 4.99,
-    weight: "100g",
-    shortDescription: "Whole black peppercorns with a sharp, warming bite.",
+    slug: "pepper-soup-kit",
+    name: "Pepper Soup Kit",
+    category: "meal-kits",
+    price: 14.99,
+    shortDescription: "Everything you need for a warming pot of pepper soup.",
     longDescription:
-      "Full-bodied and pungent, our whole black peppercorns are graded for size and freshness. Grind them fresh for the fullest flavour in any dish.",
+      "Our pepper soup kit brings together pre-measured spices and aromatics so you can go straight from pot to bowl. Just add your protein and vegetables of choice.",
     inStock: true,
-    featured: false,
-    image: { colorFrom: "brown", colorTo: "ink", icon: "pepper" },
-    photo: "/images/products/black-pepper.jpg",
+    featured: true,
+    image: { colorFrom: "burnt-orange", colorTo: "deep-green", icon: "pot" },
+    photo: "/images/products/pepper-soup.jpg",
+  },
+  {
+    slug: "dry-bitter-leaf",
+    name: "Dry Bitter Leaf",
+    category: "dried-leaves-and-herbs",
+    price: 3.99,
+    weight: "100g",
+    shortDescription: "Sun-dried bitter leaf, washed and ready for your pot.",
+    longDescription:
+      "Sun-dried and cleaned to save you the work, our bitter leaf rehydrates beautifully for soups and stews. A little goes a long way, with that unmistakable earthy bite.",
+    inStock: true,
+    featured: true,
+    image: { colorFrom: "deep-green", colorTo: "deep-green-dark", icon: "leaf" },
+    photo: "/images/products/dry-bitter-leaf.jpg",
   },
   {
     slug: "bay-leaf",
@@ -133,19 +205,6 @@ export const products: Product[] = [
     photo: "/images/products/crayfish.jpg",
   },
   {
-    slug: "pepper-soup-kit",
-    name: "Pepper Soup Kit",
-    category: "meal-kits",
-    price: 14.99,
-    shortDescription: "Everything you need for a warming pot of pepper soup.",
-    longDescription:
-      "Our pepper soup kit brings together pre-measured spices and aromatics so you can go straight from pot to bowl. Just add your protein and vegetables of choice.",
-    inStock: true,
-    featured: true,
-    image: { colorFrom: "burnt-orange", colorTo: "deep-green", icon: "pot" },
-    photo: "/images/products/pepper-soup.jpg",
-  },
-  {
     slug: "jollof-rice-kit",
     name: "Jollof Rice Kit",
     category: "meal-kits",
@@ -160,35 +219,6 @@ export const products: Product[] = [
     photo: "/images/products/jollof-rice-kit.jpg",
   },
   {
-    slug: "kilishi",
-    name: "Kilishi",
-    category: "snacks",
-    price: 7.99,
-    weight: "100g",
-    shortDescription: "Spiced, sun-dried beef strips with a bold peppery crust.",
-    longDescription:
-      "Kilishi is thinly sliced beef, marinated in a peanut and pepper spice paste, then sun-dried to a chewy, deeply savoury finish. A West African classic snack, best enjoyed straight from the pack or warmed through.",
-    inStock: true,
-    featured: true,
-    bestSeller: true,
-    image: { colorFrom: "brown", colorTo: "ink", icon: "seed" },
-    photo: "/images/products/kilishi.jpg",
-  },
-  {
-    slug: "suya-spice",
-    name: "Suya Spice Blend",
-    category: "spices-and-seasoning",
-    price: 4.99,
-    weight: "100g",
-    shortDescription: "Smoky peanut-based seasoning built for the grill.",
-    longDescription:
-      "Our suya spice blends roasted ground peanuts with a fiery mix of chillies and warming spices, just like the street-side grills back home. Rub it onto skewers or roasted vegetables for that unmistakable smoky heat.",
-    inStock: true,
-    featured: true,
-    image: { colorFrom: "burnt-orange", colorTo: "brown-dark", icon: "jar" },
-    photo: "/images/products/suya-spice.jpg",
-  },
-  {
     slug: "ground-egusi",
     name: "Ground Egusi",
     category: "soup-ingredients",
@@ -201,33 +231,6 @@ export const products: Product[] = [
     featured: true,
     image: { colorFrom: "gold-light", colorTo: "gold-dark", icon: "grain" },
     photo: "/images/products/ground-egusi.jpg",
-  },
-  {
-    slug: "ground-ogbono",
-    name: "Ground Ogbono",
-    category: "soup-ingredients",
-    price: 7.99,
-    weight: "250g",
-    shortDescription: "Ground ogbono seeds for a rich, silky draw soup.",
-    longDescription:
-      "Milled from wild mango seeds, our ground ogbono releases a distinctive silky texture as it simmers, giving draw soup its signature body. A little goes a long way in building a rich, hearty pot.",
-    inStock: true,
-    image: { colorFrom: "brown-light", colorTo: "brown", icon: "grain" },
-    photo: "/images/products/ground-ogbono.jpg",
-  },
-  {
-    slug: "cayenne-pepper",
-    name: "Cayenne Pepper",
-    category: "spices-and-seasoning",
-    price: 3.99,
-    weight: "100g",
-    shortDescription: "Ground cayenne with a clean, steady heat.",
-    longDescription:
-      "Our cayenne pepper is dried and finely ground for a clean, consistent heat that works into any dish. A pantry essential for seasoning, marinades and sauces.",
-    inStock: true,
-    isNew: true,
-    image: { colorFrom: "burnt-orange-light", colorTo: "burnt-orange", icon: "pepper" },
-    photo: "/images/products/cayenne-pepper.jpg",
   },
 ];
 

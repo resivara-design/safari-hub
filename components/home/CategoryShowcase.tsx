@@ -39,7 +39,7 @@ export default function CategoryShowcase() {
               <Link
                 key={category.slug}
                 href={`/shop?category=${category.slug}`}
-                className="group flex flex-col overflow-hidden rounded-2xl bg-ivory shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lg"
+                className="group flex h-full flex-col overflow-hidden rounded-2xl bg-ivory shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lg"
               >
                 <div className="flex w-full items-center justify-center overflow-hidden bg-cream p-2">
                   {featured?.photo && (
@@ -54,7 +54,7 @@ export default function CategoryShowcase() {
                   )}
                 </div>
                 <div className="flex flex-col gap-0.5 p-3 text-center">
-                  <span className="font-heading text-sm font-bold text-ink md:text-base">
+                  <span className="line-clamp-2 min-h-[2.25rem] font-heading text-sm font-bold text-black md:text-base">
                     {category.name}
                   </span>
                   <span className="text-xs text-brown/70 md:text-sm">

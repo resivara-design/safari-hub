@@ -1,0 +1,61 @@
+import Stripe from "stripe";
+import { site } from "@/lib/site";
+import type { CheckoutPayload } from "./types";
+
+let stripeClient: Stripe | null = null;
+
+function getStripeClient(): Stripe {
+  if (!process.env.STRIPE_SECRET_KEY) {
+    throw new Error("STRIPE_SECRET_KEY is not configured");
+  }
+  if (!stripeClient) {
+    stripeClient = new Stripe(process.env.STRIPE_SECRET_KEY);
+  }
+  return stripeClient;
+}
+
+export function isStripeConfigured(): boolean {
+  return Boolean(process.env.STRIPE_SECRET_KEY);
+}
+
+export async function createStripeCheckoutSession(payload: CheckoutPayload): Promise<{ url: string }> {
+  const stripe = getStripeClient();
+
+  const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = payload.items.map((item) => ({
+    price_data: {
+      currency: "gbp",
+      product_data: { name: item.name },
+      unit_amount: Math.round(item.price * 100),
+    },
+    quantity: item.quantity,
+  }));
+
+  const session = await stripe.checkout.sessions.create({
+    mode: "payment",
+    payment_method_types: ["card"],
+    line_items,
+    customer_email: payload.customer.email,
+    shipping_address_collection: { allowed_countries: ["GB"] },
+    metadata: {
+      fullName: payload.customer.fullName,
+      phone: payload.customer.phone,
+      addressLine1: payload.customer.addressLine1,
+      addressLine2: payload.customer.addressLine2 || "",
+      city: payload.customer.city,
+      postcode: payload.customer.postcode,
+    },
+    success_url: `${site.url}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${site.url}/checkout/cancel`,
+  });
+
+  if (!session.url) {
+    throw new Error("Stripe did not return a checkout URL");
+  }
+
+  return { url: session.url };
+}
+
+export async function retrieveStripeSession(sessionId: string) {
+  const stripe = getStripeClient();
+  return stripe.checkout.sessions.retrieve(sessionId);
+}

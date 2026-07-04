@@ -20,7 +20,7 @@ export default function Newsletter() {
   }
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-deep-green to-charcoal py-24 text-center text-cream md:py-32">
+    <section className="relative overflow-hidden bg-gradient-to-br from-deep-green to-charcoal py-12 text-center text-cream md:py-20">
       <PatternBackground className="text-gold/[0.08]" />
       <div className="relative mx-auto max-w-3xl px-4 md:px-6">
         <h2 className="font-heading text-3xl text-cream">Join Our Newsletter</h2>

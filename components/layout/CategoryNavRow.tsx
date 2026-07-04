@@ -15,10 +15,10 @@ export default function CategoryNavRow() {
   return (
     <div className="border-b border-brown/10 bg-ivory">
       <div className="mx-auto max-w-6xl px-4 md:px-6">
-        <div className="scrollbar-hide flex items-center gap-6 overflow-x-auto py-3">
+        <div className="scrollbar-hide flex items-center gap-6 overflow-x-auto scroll-smooth snap-x snap-proximity py-3">
           <Link
             href="/shop"
-            className="flex shrink-0 items-center gap-1.5 rounded font-semibold text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
+            className="flex shrink-0 snap-start items-center gap-1.5 rounded font-semibold text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
           >
             <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
               <path d="M4 6h16M4 12h16M4 18h16" />
@@ -30,7 +30,7 @@ export default function CategoryNavRow() {
             <Link
               key={category.slug}
               href={`/shop?category=${category.slug}`}
-              className="flex shrink-0 items-center gap-1.5 rounded text-sm text-brown hover:text-deep-green focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
+              className="flex shrink-0 snap-start items-center gap-1.5 rounded text-sm text-brown hover:text-deep-green focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
             >
               <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d={categoryIcons[category.slug]} />
@@ -41,7 +41,7 @@ export default function CategoryNavRow() {
 
           <Link
             href="/shop"
-            className="shrink-0 whitespace-nowrap rounded text-sm font-semibold text-deep-green hover:text-deep-green-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
+            className="shrink-0 snap-start whitespace-nowrap rounded text-sm font-semibold text-deep-green hover:text-deep-green-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
           >
             More
           </Link>

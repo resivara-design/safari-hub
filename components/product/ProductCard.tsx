@@ -15,7 +15,7 @@ export default function ProductCard({ product }: { product: Product }) {
   const average = getAverageRating(product.slug);
 
   return (
-    <div className="group flex h-full flex-col gap-4 rounded-2xl bg-ivory p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl md:p-6">
+    <div className="group flex h-full flex-col gap-4 rounded-2xl bg-ivory p-5 shadow-[0_2px_12px_-4px_rgba(92,58,26,0.12)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-12px_rgba(92,58,26,0.35)] md:p-6">
       <Link href={`/product/${product.slug}`} className="flex flex-col gap-4">
         <div className="relative overflow-hidden rounded-xl">
           {product.bestSeller && (

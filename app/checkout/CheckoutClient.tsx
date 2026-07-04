@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useCart } from "@/lib/cart/use-cart";
 import FormField from "@/components/forms/FormField";
 import Button from "@/components/ui/Button";
@@ -9,9 +11,7 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import ProductImage from "@/components/product/ProductImage";
 import FreeDeliveryBadge from "@/components/ui/FreeDeliveryBadge";
 import { formatPrice } from "@/lib/format";
-import { processCheckout } from "@/lib/payments";
-import { site } from "@/lib/site";
-import type { CheckoutCustomer } from "@/lib/payments/types";
+import type { CheckoutCustomer, CheckoutPayload } from "@/lib/payments/types";
 import type { ProductImagePlaceholder as ImagePlaceholderConfig } from "@/types/product";
 
 const initialCustomer: CheckoutCustomer = {
@@ -24,18 +24,35 @@ const initialCustomer: CheckoutCustomer = {
   postcode: "",
 };
 
+const paypalClientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
+
 export default function CheckoutClient() {
-  const { items, subtotal, dispatch } = useCart();
+  const router = useRouter();
+  const { items, subtotal } = useCart();
   const [customer, setCustomer] = useState<CheckoutCustomer>(initialCustomer);
   const [errors, setErrors] = useState<Partial<Record<keyof CheckoutCustomer, string>>>({});
-  const [submitting, setSubmitting] = useState(false);
-  const [result, setResult] = useState<{ orderId: string; message: string } | null>(null);
+  const [detailsConfirmed, setDetailsConfirmed] = useState(false);
+  const [processing, setProcessing] = useState<"stripe" | "paypal" | null>(null);
+  const [paymentError, setPaymentError] = useState<string | null>(null);
 
   function update(field: keyof CheckoutCustomer, value: string) {
     setCustomer((prev) => ({ ...prev, [field]: value }));
   }
 
-  async function handleSubmit(e: React.FormEvent) {
+  function buildPayload(): CheckoutPayload {
+    return {
+      customer,
+      items: items.map((item) => ({
+        slug: item.slug,
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity,
+      })),
+      subtotal,
+    };
+  }
+
+  function handleConfirmDetails(e: React.FormEvent) {
     e.preventDefault();
     const nextErrors: Partial<Record<keyof CheckoutCustomer, string>> = {};
     if (!customer.fullName.trim()) nextErrors.fullName = "Full name is required.";
@@ -53,54 +70,30 @@ export default function CheckoutClient() {
     }
 
     setErrors({});
-    setSubmitting(true);
-
-    const checkoutResult = await processCheckout({
-      customer,
-      items: items.map((item) => ({
-        slug: item.slug,
-        name: item.name,
-        price: item.price,
-        quantity: item.quantity,
-      })),
-      subtotal,
-    });
-
-    setSubmitting(false);
-
-    if (checkoutResult.success) {
-      dispatch({ type: "CLEAR_CART" });
-      setResult({ orderId: checkoutResult.orderId, message: checkoutResult.message });
-    }
+    setPaymentError(null);
+    setDetailsConfirmed(true);
   }
 
-  if (result) {
-    return (
-      <div className="mx-auto max-w-2xl px-4 py-20 text-center md:px-6">
-        <SectionHeading eyebrow="Order Confirmed" heading="Thank you for your order!" />
-        <p className="mt-4 text-brown">{result.message}</p>
-        <p className="mt-2 font-heading text-xl text-deep-green">Order ID: {result.orderId}</p>
-        <div className="mt-6">
-          <Button href="/shop" variant="primary" size="lg">
-            Continue Shopping
-          </Button>
-        </div>
-        <div className="mt-8 rounded-2xl border border-brown/10 bg-ivory p-6 text-sm text-brown">
-          <p className="font-heading text-base text-ink">Questions about your order?</p>
-          <div className="mt-2 flex flex-col gap-1">
-            <a href={`mailto:${site.contactEmail}`} className="text-deep-green hover:underline">
-              {site.contactEmail}
-            </a>
-            <a href={site.phoneLink} className="text-deep-green hover:underline">
-              {site.phoneNumber}
-            </a>
-            <a href={site.whatsappLink} target="_blank" rel="noreferrer" className="text-deep-green hover:underline">
-              WhatsApp: {site.whatsappNumber}
-            </a>
-          </div>
-        </div>
-      </div>
-    );
+  async function handlePayWithCard() {
+    setProcessing("stripe");
+    setPaymentError(null);
+    try {
+      const response = await fetch("/api/checkout/stripe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(buildPayload()),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        setPaymentError(data.error || "Something went wrong. Please try again.");
+        setProcessing(null);
+        return;
+      }
+      window.location.href = data.url;
+    } catch {
+      setPaymentError("Something went wrong starting card checkout. Please try again.");
+      setProcessing(null);
+    }
   }
 
   if (items.length === 0) {
@@ -122,76 +115,158 @@ export default function CheckoutClient() {
       <SectionHeading eyebrow="Checkout" heading="Shipping &amp; Payment" align="left" />
 
       <div className="mt-8 grid grid-cols-1 gap-10 md:grid-cols-3">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4 md:col-span-2">
-          <FormField
-            label="Full Name"
-            name="fullName"
-            value={customer.fullName}
-            onChange={(v) => update("fullName", v)}
-            error={errors.fullName}
-            required
-          />
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <FormField
-              label="Email Address"
-              name="email"
-              type="email"
-              value={customer.email}
-              onChange={(v) => update("email", v)}
-              error={errors.email}
-              required
-            />
-            <FormField
-              label="Phone Number"
-              name="phone"
-              type="tel"
-              value={customer.phone}
-              onChange={(v) => update("phone", v)}
-              error={errors.phone}
-              required
-            />
-          </div>
-          <FormField
-            label="Address Line 1"
-            name="addressLine1"
-            value={customer.addressLine1}
-            onChange={(v) => update("addressLine1", v)}
-            error={errors.addressLine1}
-            required
-          />
-          <FormField
-            label="Address Line 2 (optional)"
-            name="addressLine2"
-            value={customer.addressLine2 || ""}
-            onChange={(v) => update("addressLine2", v)}
-          />
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <FormField
-              label="City"
-              name="city"
-              value={customer.city}
-              onChange={(v) => update("city", v)}
-              error={errors.city}
-              required
-            />
-            <FormField
-              label="Postcode"
-              name="postcode"
-              value={customer.postcode}
-              onChange={(v) => update("postcode", v)}
-              error={errors.postcode}
-              required
-            />
-          </div>
+        <div className="flex flex-col gap-4 md:col-span-2">
+          <form onSubmit={handleConfirmDetails} className={`flex flex-col gap-4 ${detailsConfirmed ? "opacity-60" : ""}`}>
+            <fieldset disabled={detailsConfirmed} className="contents">
+              <FormField
+                label="Full Name"
+                name="fullName"
+                value={customer.fullName}
+                onChange={(v) => update("fullName", v)}
+                error={errors.fullName}
+                required
+              />
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <FormField
+                  label="Email Address"
+                  name="email"
+                  type="email"
+                  value={customer.email}
+                  onChange={(v) => update("email", v)}
+                  error={errors.email}
+                  required
+                />
+                <FormField
+                  label="Phone Number"
+                  name="phone"
+                  type="tel"
+                  value={customer.phone}
+                  onChange={(v) => update("phone", v)}
+                  error={errors.phone}
+                  required
+                />
+              </div>
+              <FormField
+                label="Address Line 1"
+                name="addressLine1"
+                value={customer.addressLine1}
+                onChange={(v) => update("addressLine1", v)}
+                error={errors.addressLine1}
+                required
+              />
+              <FormField
+                label="Address Line 2 (optional)"
+                name="addressLine2"
+                value={customer.addressLine2 || ""}
+                onChange={(v) => update("addressLine2", v)}
+              />
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <FormField
+                  label="City"
+                  name="city"
+                  value={customer.city}
+                  onChange={(v) => update("city", v)}
+                  error={errors.city}
+                  required
+                />
+                <FormField
+                  label="Postcode"
+                  name="postcode"
+                  value={customer.postcode}
+                  onChange={(v) => update("postcode", v)}
+                  error={errors.postcode}
+                  required
+                />
+              </div>
+            </fieldset>
 
-          <div className="mt-2 rounded-xl border border-brown/10 bg-cream p-4 text-sm text-brown/70">
-            Secure payment via card — Stripe &amp; PayPal coming soon.
-          </div>
+            {!detailsConfirmed && (
+              <Button type="submit" variant="primary" size="lg" className="mt-2 w-fit">
+                Continue to Payment
+              </Button>
+            )}
+          </form>
 
-          <Button type="submit" variant="primary" size="lg" disabled={submitting} className="mt-2 w-fit">
-            {submitting ? "Placing Order..." : "Place Order"}
-          </Button>
-        </form>
+          {detailsConfirmed && (
+            <div className="mt-2 flex flex-col gap-4 rounded-2xl border border-brown/10 bg-cream p-5">
+              <div className="flex items-center justify-between">
+                <h3 className="font-heading text-lg text-ink">Choose a payment method</h3>
+                <button
+                  type="button"
+                  onClick={() => setDetailsConfirmed(false)}
+                  className="text-sm font-semibold text-deep-green hover:underline"
+                >
+                  ← Edit details
+                </button>
+              </div>
+
+              {paymentError && (
+                <div className="rounded-xl border border-burnt-orange/30 bg-burnt-orange/10 p-3 text-sm text-burnt-orange-dark">
+                  {paymentError}
+                </div>
+              )}
+
+              <Button
+                type="button"
+                variant="secondary"
+                size="lg"
+                disabled={processing !== null}
+                onClick={handlePayWithCard}
+                className="w-full"
+              >
+                {processing === "stripe" ? "Redirecting to secure payment..." : "Pay with Card (Visa, Mastercard, Apple Pay, Google Pay)"}
+              </Button>
+
+              {paypalClientId ? (
+                <PayPalScriptProvider options={{ clientId: paypalClientId, currency: "GBP" }}>
+                  <PayPalButtons
+                    style={{ layout: "vertical", color: "gold", label: "paypal" }}
+                    disabled={processing !== null}
+                    createOrder={async () => {
+                      setProcessing("paypal");
+                      setPaymentError(null);
+                      const response = await fetch("/api/checkout/paypal/create-order", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(buildPayload()),
+                      });
+                      const data = await response.json();
+                      if (!response.ok) {
+                        setPaymentError(data.error || "Something went wrong. Please try again.");
+                        setProcessing(null);
+                        throw new Error(data.error || "PayPal order creation failed");
+                      }
+                      return data.id;
+                    }}
+                    onApprove={async (data) => {
+                      const response = await fetch("/api/checkout/paypal/capture-order", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ orderId: data.orderID }),
+                      });
+                      if (!response.ok) {
+                        const body = await response.json();
+                        setPaymentError(body.error || "Something went wrong confirming your payment.");
+                        setProcessing(null);
+                        return;
+                      }
+                      router.push("/checkout/success");
+                    }}
+                    onCancel={() => setProcessing(null)}
+                    onError={() => {
+                      setPaymentError("Something went wrong with PayPal. Please try again.");
+                      setProcessing(null);
+                    }}
+                  />
+                </PayPalScriptProvider>
+              ) : (
+                <div className="rounded-xl border border-brown/10 bg-ivory p-3 text-sm text-brown/70">
+                  PayPal checkout is not configured yet.
+                </div>
+              )}
+            </div>
+          )}
+        </div>
 
         <div className="flex flex-col gap-4">
           <div className="rounded-2xl border border-brown/10 bg-ivory p-6">

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Hero from "@/components/home/Hero";
 import FeaturedProducts from "@/components/home/FeaturedProducts";
+import BestSellers from "@/components/home/BestSellers";
 import CategoryShowcase from "@/components/home/CategoryShowcase";
 import TrustBadgeBand from "@/components/home/TrustBadgeBand";
 import WhyShopWith from "@/components/home/WhyShopWith";
@@ -30,10 +31,13 @@ export default function HomePage() {
         <CategoryShowcase />
       </FadeInSection>
       <FadeInSection>
+        <WhyShopWith />
+      </FadeInSection>
+      <FadeInSection>
         <FeaturedProducts />
       </FadeInSection>
       <FadeInSection>
-        <WhyShopWith />
+        <BestSellers />
       </FadeInSection>
       <FadeInSection>
         <TrustSection />

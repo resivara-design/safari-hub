@@ -26,7 +26,7 @@ const values = [
 
 export default function WhyShopWith() {
   return (
-    <section className="relative overflow-hidden bg-white py-24 md:py-32">
+    <section className="relative overflow-hidden bg-white py-12 md:py-20">
       <PatternBackground className="text-deep-green/[0.05]" />
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <SectionHeading eyebrow="Why Safari Hub" heading="Why Shop With Us" />

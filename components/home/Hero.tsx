@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import Button from "@/components/ui/Button";
+import Link from "next/link";
 
 const trustItems = [
   { label: "Free UK delivery over £40", icon: "M3 7h11v8H3zM14 10h4l3 3v2h-7zM6.5 19a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM17.5 19a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" },
@@ -12,7 +12,7 @@ const trustItems = [
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-white text-ink">
+    <section className="relative overflow-hidden bg-white text-black">
       <motion.div
         initial={{ opacity: 0, y: -16 }}
         animate={{ opacity: 1, y: 0 }}
@@ -42,34 +42,19 @@ export default function Hero() {
       </motion.div>
 
       <div className="relative mx-auto flex max-w-6xl flex-col items-start gap-7 px-4 pb-24 pt-2 md:px-6 md:pb-32 md:pt-4">
-        <motion.span
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.15, ease: "easeOut" }}
-          className="rounded-full bg-deep-green px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-cream shadow-sm"
-        >
-          Premium African Marketplace
-        </motion.span>
-        <motion.span
-          initial={{ opacity: 0, scaleX: 0 }}
-          animate={{ opacity: 1, scaleX: 1 }}
-          transition={{ duration: 0.6, delay: 0.22, ease: "easeOut" }}
-          className="h-px w-16 origin-left bg-gradient-to-r from-deep-green to-transparent"
-          aria-hidden="true"
-        />
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.25, ease: "easeOut" }}
-          className="max-w-3xl font-fancy text-5xl leading-[1.05] text-ink md:text-7xl"
+          transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
+          className="max-w-3xl font-fancy text-5xl leading-[1.05] text-black md:text-7xl"
         >
           Authentic African Ingredients Delivered to Your Door
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.32, ease: "easeOut" }}
-          className="max-w-xl text-lg text-brown"
+          transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
+          className="max-w-xl text-lg text-black/70"
         >
           From bitter kola to jollof rice kits, we bring carefully sourced, quality-checked
           ingredients straight from trusted growers to your kitchen.
@@ -77,31 +62,33 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
+          transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
           className="flex flex-wrap items-center gap-4"
         >
-          <Button href="/shop" variant="primary" size="lg">
+          <Link
+            href="/shop"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-black bg-black px-8 py-4 text-lg font-semibold text-white shadow-md transition-colors duration-200 hover:bg-white hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2"
+          >
             Shop Now
-          </Button>
-          <Button
+          </Link>
+          <Link
             href="/#categories"
-            variant="outline"
-            size="lg"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-black/40 px-8 py-4 text-lg font-semibold text-black transition-colors duration-200 hover:bg-black hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2"
           >
             Explore Categories
-          </Button>
+          </Link>
         </motion.div>
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.7, delay: 0.5, ease: "easeOut" }}
+          transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
           className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2"
         >
           {trustItems.map((item) => (
-            <div key={item.label} className="flex items-center gap-2 text-sm text-brown">
+            <div key={item.label} className="flex items-center gap-2 text-sm text-black/70">
               <svg
                 viewBox="0 0 24 24"
-                className="h-4 w-4 shrink-0 text-deep-green"
+                className="h-4 w-4 shrink-0 text-black"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="1.8"

@@ -60,6 +60,11 @@ const config: Config = {
           light: "#9C1F2E",
           dark: "#4E0B14",
         },
+        sunshine: {
+          DEFAULT: "#FFC93C",
+          light: "#FFDB7A",
+          dark: "#E0A80F",
+        },
         ink: "#241C15",
         charcoal: {
           DEFAULT: "#211C17",

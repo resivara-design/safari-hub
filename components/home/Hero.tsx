@@ -12,7 +12,7 @@ const trustItems = [
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-darkred text-cream">
+    <section className="relative overflow-hidden bg-sunshine text-ink">
       <motion.div
         initial={{ opacity: 0, y: -16 }}
         animate={{ opacity: 1, y: 0 }}
@@ -54,14 +54,14 @@ export default function Hero() {
           initial={{ opacity: 0, scaleX: 0 }}
           animate={{ opacity: 1, scaleX: 1 }}
           transition={{ duration: 0.6, delay: 0.22, ease: "easeOut" }}
-          className="h-px w-16 origin-left bg-gradient-to-r from-gold to-transparent"
+          className="h-px w-16 origin-left bg-gradient-to-r from-deep-green to-transparent"
           aria-hidden="true"
         />
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.25, ease: "easeOut" }}
-          className="max-w-3xl font-fancy text-5xl leading-[1.05] text-cream md:text-7xl"
+          className="max-w-3xl font-fancy text-5xl leading-[1.05] text-ink md:text-7xl"
         >
           Authentic African Ingredients Delivered to Your Door
         </motion.h1>
@@ -69,7 +69,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.32, ease: "easeOut" }}
-          className="max-w-xl text-lg text-cream/80"
+          className="max-w-xl text-lg text-brown"
         >
           From bitter kola to jollof rice kits, we bring carefully sourced, quality-checked
           ingredients straight from trusted growers to your kitchen.
@@ -87,7 +87,7 @@ export default function Hero() {
             href="/#categories"
             variant="outline"
             size="lg"
-            className="border-cream/40 text-cream hover:bg-cream/10 hover:text-cream focus-visible:ring-offset-darkred"
+            className="border-ink/30 text-ink hover:bg-ink/10 hover:text-ink focus-visible:ring-offset-sunshine"
           >
             Explore Categories
           </Button>
@@ -99,10 +99,10 @@ export default function Hero() {
           className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2"
         >
           {trustItems.map((item) => (
-            <div key={item.label} className="flex items-center gap-2 text-sm text-cream/70">
+            <div key={item.label} className="flex items-center gap-2 text-sm text-brown">
               <svg
                 viewBox="0 0 24 24"
-                className="h-4 w-4 shrink-0 text-gold"
+                className="h-4 w-4 shrink-0 text-deep-green"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="1.8"

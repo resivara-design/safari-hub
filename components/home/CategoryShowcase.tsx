@@ -41,14 +41,15 @@ export default function CategoryShowcase() {
                 href={`/shop?category=${category.slug}`}
                 className="group flex flex-col overflow-hidden rounded-2xl bg-ivory shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lg"
               >
-                <div className="relative aspect-square overflow-hidden bg-cream">
+                <div className="flex w-full items-center justify-center overflow-hidden bg-cream p-2">
                   {featured?.photo && (
                     <Image
                       src={featured.photo}
                       alt={category.name}
-                      fill
+                      width={788}
+                      height={1400}
                       sizes="(min-width: 1024px) 180px, (min-width: 640px) 30vw, 45vw"
-                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      className="h-auto w-full object-contain object-center transition-transform duration-300 group-hover:scale-105"
                     />
                   )}
                 </div>

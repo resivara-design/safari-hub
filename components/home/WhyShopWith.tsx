@@ -33,7 +33,7 @@ export default function WhyShopWith() {
         <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {values.map((value) => (
             <div key={value.title} className="flex flex-col items-center gap-3 rounded-2xl border border-brown/10 bg-ivory p-6 text-center">
-              <span className="flex h-14 w-14 items-center justify-center rounded-full bg-deep-green/10 text-deep-green">
+              <span className="flex h-14 w-14 items-center justify-center rounded-full bg-charcoal/10 text-charcoal">
                 <svg viewBox="0 0 24 24" className="h-7 w-7" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                   <path d={value.icon} />
                 </svg>

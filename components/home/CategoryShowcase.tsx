@@ -28,7 +28,7 @@ export default function CategoryShowcase() {
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <SectionHeading heading="Shop Popular Categories" align="center" />
 
-        <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 md:gap-6 lg:grid-cols-6">
+        <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 md:gap-6 lg:grid-cols-6">
           {categories.map((category) => {
             const categoryProducts = products.filter((p) => p.category === category.slug);
             const fromPrice = Math.min(...categoryProducts.map((p) => p.price));

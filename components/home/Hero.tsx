@@ -17,7 +17,7 @@ export default function Hero() {
         initial={{ opacity: 0, y: -16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
-        className="relative mb-10 w-full border-y-4 md:mb-14"
+        className="relative mb-4 w-full border-y-4 md:mb-6"
         style={{
           // thin wood-tone rule top and bottom, framing the full-bleed image without breaking the edge-to-edge width
           borderImage:
@@ -41,7 +41,7 @@ export default function Hero() {
         </div>
       </motion.div>
 
-      <div className="relative mx-auto flex max-w-6xl flex-col items-start gap-7 px-4 py-24 md:px-6 md:py-32">
+      <div className="relative mx-auto flex max-w-6xl flex-col items-start gap-7 px-4 pb-24 pt-2 md:px-6 md:pb-32 md:pt-4">
         <motion.span
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}

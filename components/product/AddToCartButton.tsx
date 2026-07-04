@@ -40,7 +40,7 @@ export default function AddToCartButton({
   return (
     <Button
       type="button"
-      variant="secondary"
+      variant="outline"
       onClick={handleAdd}
       disabled={!product.inStock}
       className={className}

@@ -8,9 +8,9 @@ import type { CategorySlug } from "@/types/product";
 
 const representativeProduct: Record<CategorySlug, string> = {
   "nuts-and-kola": "bitter-kola",
-  "spices-and-seasoning": "crayfish",
+  "spices-and-seasoning": "curry-powder",
   "dried-leaves-and-herbs": "dry-bitter-leaf",
-  "meal-kits": "jollof-rice-kit",
+  "meal-kits": "pepper-soup-kit",
   snacks: "kilishi",
   "soup-ingredients": "ground-egusi",
 };

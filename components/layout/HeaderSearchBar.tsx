@@ -3,7 +3,13 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function HeaderSearchBar() {
+interface HeaderSearchBarProps {
+  inputClassName?: string;
+}
+
+export default function HeaderSearchBar({
+  inputClassName = "border border-brown/20",
+}: HeaderSearchBarProps) {
   const router = useRouter();
   const [query, setQuery] = useState("");
 
@@ -32,7 +38,7 @@ export default function HeaderSearchBar() {
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search for bitter kola, suya spice, egusi..."
         aria-label="Search products"
-        className="w-full rounded-full border border-brown/20 bg-ivory py-2.5 pl-11 pr-24 text-sm text-ink placeholder:text-brown/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2"
+        className={`w-full rounded-full ${inputClassName} bg-ivory py-2.5 pl-11 pr-24 text-sm text-ink placeholder:text-brown/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2`}
       />
       <button
         type="submit"

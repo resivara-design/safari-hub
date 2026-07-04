@@ -7,6 +7,7 @@ import CartBadge from "@/components/cart/CartBadge";
 import MobileNav from "./MobileNav";
 import HeaderSearchBar from "./HeaderSearchBar";
 import TopContactBar from "./TopContactBar";
+import MobileAnnouncementBar from "./MobileAnnouncementBar";
 
 const navLinks = [
   { href: "/shop", label: "Shop" },
@@ -35,17 +36,18 @@ export default function Header() {
         scrolled ? "shadow-lg shadow-brown/10" : ""
       }`}
     >
+      <MobileAnnouncementBar />
       <TopContactBar />
 
       <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 py-4 md:px-6">
         <Link
           href="/"
-          className="flex shrink-0 items-center gap-2 rounded font-fancy text-2xl tracking-wide text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
+          className="flex shrink-0 items-center gap-2 rounded font-fancy text-xl tracking-wide text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-cream md:text-2xl"
         >
           <Image src="/images/logo.png" alt="Safari Hub" width={40} height={40} priority className="rounded-full" />
           <span className="flex flex-col leading-tight">
             Safari Hub
-            <span className="font-body text-xs font-normal normal-case tracking-normal text-brown/60">
+            <span className="hidden font-body text-xs font-normal normal-case tracking-normal text-brown/60 md:block">
               Authentic African Ingredients
             </span>
           </span>
@@ -57,7 +59,7 @@ export default function Header() {
           </div>
         </div>
 
-        <div className="flex shrink-0 items-center gap-1 md:ml-auto">
+        <div className="flex shrink-0 items-center gap-0.5 sm:gap-1 md:ml-auto">
           <Link
             href="/contact"
             className="flex flex-col items-center gap-1 rounded p-2 text-ink hover:text-deep-green focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
@@ -86,8 +88,19 @@ export default function Header() {
       </div>
 
       <div className="border-t border-brown/10 bg-cream/40 md:hidden">
-        <div className="px-4 py-3">
-          <HeaderSearchBar />
+        <div className="flex items-center gap-2 px-4 py-3">
+          <Link
+            href="/shop"
+            aria-label="Browse all categories"
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border-2 border-ink/70 bg-ivory text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2"
+          >
+            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </Link>
+          <div className="min-w-0 flex-1">
+            <HeaderSearchBar inputClassName="border-2 border-ink/70" />
+          </div>
         </div>
       </div>
 

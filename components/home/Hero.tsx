@@ -26,12 +26,12 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      <div className="mx-auto max-w-3xl px-4 py-12 text-center md:px-6 md:py-16">
+      <div className="mx-auto max-w-3xl px-4 py-6 text-center sm:py-8 md:px-6 md:py-16">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }}
-          className="font-fancy text-3xl leading-tight text-ink sm:text-4xl md:text-5xl"
+          className="font-fancy text-2xl leading-tight text-ink sm:text-3xl md:text-5xl"
         >
           Authentic African Ingredients Delivered to Your Door
         </motion.h1>
@@ -52,13 +52,13 @@ export default function Hero() {
         >
           <Link
             href="/shop"
-            className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-deep-green px-8 py-4 text-lg font-semibold text-cream shadow-md transition-colors duration-200 hover:bg-deep-green-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 sm:w-auto"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-deep-green px-6 py-3 text-lg font-semibold text-cream shadow-md transition-colors duration-200 hover:bg-deep-green-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 sm:w-auto sm:px-8 sm:py-4"
           >
             Shop Now
           </Link>
           <Link
             href="/#categories"
-            className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-deep-green/50 px-8 py-4 text-lg font-semibold text-deep-green transition-colors duration-200 hover:bg-deep-green hover:text-cream focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 sm:w-auto"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-deep-green/50 px-6 py-3 text-lg font-semibold text-deep-green transition-colors duration-200 hover:bg-deep-green hover:text-cream focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 sm:w-auto sm:px-8 sm:py-4"
           >
             Explore Categories
           </Link>

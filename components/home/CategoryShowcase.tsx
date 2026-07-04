@@ -24,7 +24,7 @@ const smallTrustItems = [
 
 export default function CategoryShowcase() {
   return (
-    <section id="categories" className="bg-cream py-16 md:py-24">
+    <section id="categories" className="bg-cream py-10 md:py-24">
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <SectionHeading heading="Shop Popular Categories" align="center" />
 

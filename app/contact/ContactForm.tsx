@@ -41,7 +41,7 @@ export default function ContactForm() {
 
   if (submitted) {
     return (
-      <div className="rounded-2xl bg-deep-green/10 p-6 text-deep-green">
+      <div className="rounded-2xl bg-black/10 p-6 text-black">
         <p className="font-heading text-xl">Message sent</p>
         <p className="mt-1 text-sm text-brown">
           Thanks for reaching out — we&apos;ll get back to you within one working day.

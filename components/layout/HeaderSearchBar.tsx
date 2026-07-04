@@ -36,7 +36,7 @@ export default function HeaderSearchBar() {
       />
       <button
         type="submit"
-        className="absolute right-1.5 rounded-full bg-deep-green px-4 py-1.5 text-sm font-semibold text-cream transition-colors hover:bg-deep-green-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2"
+        className="absolute right-1.5 rounded-full bg-black px-4 py-1.5 text-sm font-semibold text-white transition-colors hover:bg-black/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2"
       >
         Search
       </button>

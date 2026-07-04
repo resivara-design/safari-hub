@@ -25,8 +25,8 @@ export default function CategoryFilter({ active, onChange }: CategoryFilterProps
             onClick={() => onChange(option.slug)}
             className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 ${
               isActive
-                ? "bg-black text-white"
-                : "bg-ivory text-brown border border-brown/15 hover:border-black"
+                ? "bg-deep-green text-cream"
+                : "bg-ivory text-brown border border-brown/15 hover:border-deep-green"
             }`}
           >
             {option.name}

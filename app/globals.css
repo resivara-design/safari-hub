@@ -7,8 +7,17 @@ html {
 }
 
 body {
-  background-color: #FFFFFF;
+  background-color: #F8F4EC;
   color: #5A3A29;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
 
 .line-clamp-2 {

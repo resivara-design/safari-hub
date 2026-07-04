@@ -3,6 +3,7 @@ import type { AnchorHTMLAttributes, ButtonHTMLAttributes } from "react";
 
 type Variant = "primary" | "secondary" | "outline";
 type Size = "sm" | "md" | "lg";
+type Rounded = "full" | "lg";
 
 const variantClasses: Record<Variant, string> = {
   primary: "bg-gold text-deep-green shadow-md hover:bg-deep-green hover:text-gold hover:shadow-lg",
@@ -18,7 +19,12 @@ const sizeClasses: Record<Size, string> = {
 };
 
 const baseClasses =
-  "inline-flex items-center justify-center gap-2 rounded-full font-body font-semibold transition-colors duration-200 disabled:opacity-50 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2";
+  "inline-flex items-center justify-center gap-2 font-body font-semibold transition-colors duration-200 disabled:opacity-50 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2";
+
+const roundedClasses: Record<Rounded, string> = {
+  full: "rounded-full",
+  lg: "rounded-lg",
+};
 
 interface ButtonLinkProps
   extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href">,
@@ -33,17 +39,18 @@ interface ButtonElementProps extends ButtonHTMLAttributes<HTMLButtonElement>, Bu
 interface ButtonStyleProps {
   variant?: Variant;
   size?: Size;
+  rounded?: Rounded;
   className?: string;
 }
 
 type ButtonProps = ButtonLinkProps | ButtonElementProps;
 
 export default function Button(props: ButtonProps) {
-  const { variant = "primary", size = "md", className = "" } = props;
-  const classes = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`;
+  const { variant = "primary", size = "md", rounded = "full", className = "" } = props;
+  const classes = `${baseClasses} ${roundedClasses[rounded]} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`;
 
   if (props.href !== undefined) {
-    const { href, variant: _v, size: _s, className: _c, ...rest } = props;
+    const { href, variant: _v, size: _s, rounded: _r, className: _c, ...rest } = props;
     return (
       <Link href={href} className={classes} {...rest}>
         {props.children}
@@ -51,7 +58,7 @@ export default function Button(props: ButtonProps) {
     );
   }
 
-  const { variant: _variant, size: _size, className: _className, href: _href, ...rest } =
+  const { variant: _variant, size: _size, rounded: _rounded, className: _className, href: _href, ...rest } =
     props as ButtonElementProps;
   return (
     <button className={classes} {...rest}>

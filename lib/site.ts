@@ -6,6 +6,7 @@ export const site = {
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://safari-hub-sigma.vercel.app",
   contactEmail: "safarihubadmin@gmail.com",
   phoneNumber: "024 7644 5621",
+  address: "Coventry, United Kingdom",
   get phoneLink() {
     return `tel:${this.phoneNumber.replace(/[^\d+]/g, "")}`;
   },

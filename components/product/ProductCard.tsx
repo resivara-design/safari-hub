@@ -47,12 +47,10 @@ export default function ProductCard({ product }: { product: Product }) {
         </div>
       </Link>
       <div className="mt-auto flex flex-col gap-2 pt-1">
-        <div className="flex items-center justify-between gap-2">
-          <span className="font-heading text-xl font-bold text-deep-green">
-            {formatPrice(product.price)}
-          </span>
-          <AddToCartButton product={product} />
-        </div>
+        <span className="font-heading text-xl font-bold text-deep-green">
+          {formatPrice(product.price)}
+        </span>
+        <AddToCartButton product={product} rounded="lg" className="w-full" />
         <QuickViewButton product={product} />
       </div>
     </div>

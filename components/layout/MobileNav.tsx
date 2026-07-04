@@ -58,7 +58,7 @@ export default function MobileNav({ open, onClose, links }: MobileNavProps) {
                   onClick={onClose}
                   aria-current={isActive ? "page" : undefined}
                   className={`rounded-lg px-3 py-3 text-base font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 ${
-                    isActive ? "bg-black/10 text-black" : "text-brown"
+                    isActive ? "bg-deep-green/10 text-deep-green" : "text-brown"
                   }`}
                 >
                   {link.label}

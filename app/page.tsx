@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import Hero from "@/components/home/Hero";
 import FeaturedProducts from "@/components/home/FeaturedProducts";
 import CategoryShowcase from "@/components/home/CategoryShowcase";
+import TrustBadgeBand from "@/components/home/TrustBadgeBand";
 import WhyShopWith from "@/components/home/WhyShopWith";
 import TrustSection from "@/components/home/TrustSection";
 import Newsletter from "@/components/home/Newsletter";
+import CategoryNavRow from "@/components/layout/CategoryNavRow";
 import FadeInSection from "@/components/motion/FadeInSection";
 import { site } from "@/lib/site";
 
@@ -21,12 +23,14 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
+      <CategoryNavRow />
+      <TrustBadgeBand />
       <Hero />
       <FadeInSection>
-        <FeaturedProducts />
+        <CategoryShowcase />
       </FadeInSection>
       <FadeInSection>
-        <CategoryShowcase />
+        <FeaturedProducts />
       </FadeInSection>
       <FadeInSection>
         <WhyShopWith />

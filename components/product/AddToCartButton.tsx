@@ -9,12 +9,14 @@ interface AddToCartButtonProps {
   product: Product;
   quantity?: number;
   className?: string;
+  rounded?: "full" | "lg";
 }
 
 export default function AddToCartButton({
   product,
   quantity = 1,
   className = "",
+  rounded,
 }: AddToCartButtonProps) {
   const { dispatch } = useCart();
   const [added, setAdded] = useState(false);
@@ -42,6 +44,7 @@ export default function AddToCartButton({
       onClick={handleAdd}
       disabled={!product.inStock}
       className={className}
+      rounded={rounded}
     >
       {!product.inStock ? "Out of Stock" : added ? "Added ✓" : "Add to Cart"}
     </Button>

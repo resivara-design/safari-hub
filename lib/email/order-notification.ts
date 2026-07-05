@@ -56,3 +56,38 @@ Total paid: £${payload.amountTotal.toFixed(2)}`;
     text,
   });
 }
+
+export async function sendCustomerConfirmationEmail(payload: OrderNotificationPayload): Promise<void> {
+  if (!payload.customerEmail) return;
+
+  const resend = getResendClient();
+
+  const itemLines = payload.items
+    .map((item) => `- ${item.name} x${item.quantity} — £${item.amountTotal.toFixed(2)}`)
+    .join("\n");
+
+  const text = `Hi ${payload.customerName},
+
+Thanks for your order from Safari Hub! Here's a summary:
+
+Order reference: ${payload.orderId}
+Shipping to: ${payload.shippingAddress}
+
+Items:
+${itemLines}
+
+Total paid: £${payload.amountTotal.toFixed(2)}
+
+We'll be in touch once your order is on its way. If you have any questions,
+just reply to this email or contact us at ${site.contactEmail}.
+
+— Safari Hub`;
+
+  await resend.emails.send({
+    from: "Safari Hub <onboarding@resend.dev>",
+    to: payload.customerEmail,
+    replyTo: site.contactEmail,
+    subject: `Your Safari Hub order ${payload.orderId} is confirmed`,
+    text,
+  });
+}

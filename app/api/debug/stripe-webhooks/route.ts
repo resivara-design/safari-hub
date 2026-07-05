@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 import { site } from "@/lib/site";
+import { sendCustomerConfirmationEmail, sendOrderNotificationEmail } from "@/lib/email/order-notification";
 
 export async function GET() {
   if (!process.env.STRIPE_SECRET_KEY) {
@@ -36,4 +37,38 @@ export async function POST(request: Request) {
     enabled_events: ["checkout.session.completed"],
   });
   return NextResponse.json({ id: endpoint.id, url: endpoint.url, secret: endpoint.secret });
+}
+
+// One-off: send both order emails directly with dummy data, bypassing Stripe
+// entirely, to isolate whether Resend delivery itself works.
+export async function PUT(request: Request) {
+  const auth = request.headers.get("x-debug-key");
+  if (auth !== "safari-hub-setup") {
+    return NextResponse.json({ error: "unauthorized" }, { status: 401 });
+  }
+  const { searchParams } = new URL(request.url);
+  const to = searchParams.get("to");
+  if (!to) {
+    return NextResponse.json({ error: "missing ?to= query param" }, { status: 400 });
+  }
+
+  const payload = {
+    orderId: "TEST-" + Date.now(),
+    customerEmail: to,
+    customerName: "Test Customer",
+    phone: "07000000000",
+    shippingAddress: "1 Test Street, London, SW1A 1AA",
+    amountTotal: 9.58,
+    items: [{ name: "Curry Powder", quantity: 2, amountTotal: 9.58 }],
+  };
+
+  const results = await Promise.allSettled([
+    sendOrderNotificationEmail(payload),
+    sendCustomerConfirmationEmail(payload),
+  ]);
+
+  return NextResponse.json({
+    storeNotification: results[0].status === "fulfilled" ? "sent" : String(results[0].reason),
+    customerConfirmation: results[1].status === "fulfilled" ? "sent" : String(results[1].reason),
+  });
 }

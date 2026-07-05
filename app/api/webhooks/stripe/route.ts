@@ -4,7 +4,11 @@ import {
   constructStripeWebhookEvent,
   listStripeSessionLineItems,
 } from "@/lib/payments/stripe-provider";
-import { isResendConfigured, sendOrderNotificationEmail } from "@/lib/email/order-notification";
+import {
+  isResendConfigured,
+  sendCustomerConfirmationEmail,
+  sendOrderNotificationEmail,
+} from "@/lib/email/order-notification";
 
 function formatShippingAddress(metadata: Stripe.Metadata | null): string {
   if (!metadata) return "n/a";
@@ -38,25 +42,32 @@ export async function POST(request: Request) {
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session;
 
-    try {
-      if (!isResendConfigured()) {
-        console.warn(`RESEND_API_KEY not configured — skipping order notification for ${session.id}`);
-      } else {
-        const items = await listStripeSessionLineItems(session.id);
-        await sendOrderNotificationEmail({
-          orderId: session.id,
-          customerEmail: session.customer_details?.email ?? session.customer_email ?? null,
-          customerName: session.metadata?.fullName ?? "Unknown customer",
-          phone: session.metadata?.phone ?? "n/a",
-          shippingAddress: formatShippingAddress(session.metadata ?? null),
-          amountTotal: (session.amount_total ?? 0) / 100,
-          items,
-        });
+    if (!isResendConfigured()) {
+      console.warn(`RESEND_API_KEY not configured — skipping order emails for ${session.id}`);
+    } else {
+      const payload = {
+        orderId: session.id,
+        customerEmail: session.customer_details?.email ?? session.customer_email ?? null,
+        customerName: session.metadata?.fullName ?? "Unknown customer",
+        phone: session.metadata?.phone ?? "n/a",
+        shippingAddress: formatShippingAddress(session.metadata ?? null),
+        amountTotal: (session.amount_total ?? 0) / 100,
+        items: await listStripeSessionLineItems(session.id),
+      };
+
+      // Send independently and log each outcome separately so a failure in
+      // one (e.g. Resend rejecting an unverified customer domain) doesn't
+      // silently swallow the other, and so Stripe still gets acknowledged.
+      const results = await Promise.allSettled([
+        sendOrderNotificationEmail(payload),
+        sendCustomerConfirmationEmail(payload),
+      ]);
+      if (results[0].status === "rejected") {
+        console.error(`Failed to send store notification email for session ${session.id}:`, results[0].reason);
       }
-    } catch (error) {
-      // Log loudly but still acknowledge the event so Stripe doesn't retry
-      // (and potentially disable the endpoint) over an email-delivery issue.
-      console.error(`Failed to send order notification email for session ${session.id}:`, error);
+      if (results[1].status === "rejected") {
+        console.error(`Failed to send customer confirmation email for session ${session.id}:`, results[1].reason);
+      }
     }
   }
 

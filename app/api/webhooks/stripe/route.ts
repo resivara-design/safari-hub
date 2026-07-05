@@ -55,6 +55,10 @@ export async function POST(request: Request) {
         items: await listStripeSessionLineItems(session.id),
       };
 
+      console.log(
+        `checkout.session.completed for ${session.id}: resolved customer email = ${payload.customerEmail ?? "(none — session had no customer_details.email or customer_email)"}`
+      );
+
       // Send independently and log each outcome separately so a failure in
       // one (e.g. Resend rejecting an unverified customer domain) doesn't
       // silently swallow the other, and so Stripe still gets acknowledged.

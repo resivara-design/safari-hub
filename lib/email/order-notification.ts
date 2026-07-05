@@ -58,7 +58,12 @@ Total paid: £${payload.amountTotal.toFixed(2)}`;
 }
 
 export async function sendCustomerConfirmationEmail(payload: OrderNotificationPayload): Promise<void> {
-  if (!payload.customerEmail) return;
+  if (!payload.customerEmail) {
+    console.warn(
+      `No customer email on Stripe session for order ${payload.orderId} — skipping customer confirmation email.`
+    );
+    return;
+  }
 
   const resend = getResendClient();
 

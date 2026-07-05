@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useCart } from "@/lib/cart/use-cart";
 import FormField from "@/components/forms/FormField";
 import Button from "@/components/ui/Button";
@@ -24,15 +22,12 @@ const initialCustomer: CheckoutCustomer = {
   postcode: "",
 };
 
-const paypalClientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
-
 export default function CheckoutClient() {
-  const router = useRouter();
   const { items, subtotal } = useCart();
   const [customer, setCustomer] = useState<CheckoutCustomer>(initialCustomer);
   const [errors, setErrors] = useState<Partial<Record<keyof CheckoutCustomer, string>>>({});
   const [detailsConfirmed, setDetailsConfirmed] = useState(false);
-  const [processing, setProcessing] = useState<"stripe" | "paypal" | null>(null);
+  const [processing, setProcessing] = useState<"stripe" | null>(null);
   const [paymentError, setPaymentError] = useState<string | null>(null);
 
   function update(field: keyof CheckoutCustomer, value: string) {
@@ -190,7 +185,7 @@ export default function CheckoutClient() {
           {detailsConfirmed && (
             <div className="mt-2 flex flex-col gap-4 rounded-2xl border border-brown/10 bg-cream p-5">
               <div className="flex items-center justify-between">
-                <h3 className="font-heading text-lg text-ink">Choose a payment method</h3>
+                <h3 className="font-heading text-lg text-ink">Payment</h3>
                 <button
                   type="button"
                   onClick={() => setDetailsConfirmed(false)}
@@ -216,54 +211,6 @@ export default function CheckoutClient() {
               >
                 {processing === "stripe" ? "Redirecting to secure payment..." : "Pay with Card (Visa, Mastercard, Apple Pay, Google Pay)"}
               </Button>
-
-              {paypalClientId ? (
-                <PayPalScriptProvider options={{ clientId: paypalClientId, currency: "GBP" }}>
-                  <PayPalButtons
-                    style={{ layout: "vertical", color: "gold", label: "paypal" }}
-                    disabled={processing !== null}
-                    createOrder={async () => {
-                      setProcessing("paypal");
-                      setPaymentError(null);
-                      const response = await fetch("/api/checkout/paypal/create-order", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify(buildPayload()),
-                      });
-                      const data = await response.json();
-                      if (!response.ok) {
-                        setPaymentError(data.error || "Something went wrong. Please try again.");
-                        setProcessing(null);
-                        throw new Error(data.error || "PayPal order creation failed");
-                      }
-                      return data.id;
-                    }}
-                    onApprove={async (data) => {
-                      const response = await fetch("/api/checkout/paypal/capture-order", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ orderId: data.orderID }),
-                      });
-                      if (!response.ok) {
-                        const body = await response.json();
-                        setPaymentError(body.error || "Something went wrong confirming your payment.");
-                        setProcessing(null);
-                        return;
-                      }
-                      router.push("/checkout/success");
-                    }}
-                    onCancel={() => setProcessing(null)}
-                    onError={() => {
-                      setPaymentError("Something went wrong with PayPal. Please try again.");
-                      setProcessing(null);
-                    }}
-                  />
-                </PayPalScriptProvider>
-              ) : (
-                <div className="rounded-xl border border-brown/10 bg-ivory p-3 text-sm text-brown/70">
-                  PayPal checkout is not configured yet.
-                </div>
-              )}
             </div>
           )}
         </div>

@@ -16,12 +16,6 @@ export default function PaymentIcons({ className = "" }: PaymentIconsProps) {
         <circle cx="17" cy="13" r="7" fill="#EB5F2E" opacity="0.85" />
         <circle cx="24" cy="13" r="7" fill="#B8933F" opacity="0.85" />
       </svg>
-      <svg viewBox="0 0 40 26" width="40" height="26" role="img" aria-label="PayPal">
-        <rect width="40" height="26" rx="4" fill="#123326" />
-        <text x="20" y="17" textAnchor="middle" fontSize="7.5" fontWeight="700" fontFamily="Arial, sans-serif" fill="#D4B268">
-          PayPal
-        </text>
-      </svg>
     </div>
   );
 }

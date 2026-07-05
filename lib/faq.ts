@@ -32,6 +32,6 @@ export const faqs: FAQ[] = [
   {
     question: "What payment methods do you accept?",
     answer:
-      "Secure card payment is coming very soon, with Stripe and PayPal support in the works. In the meantime, our checkout flow is fully built and ready — see the Checkout page for details.",
+      "We accept secure card payment via Stripe, including Visa, Mastercard, Apple Pay and Google Pay.",
   },
 ];

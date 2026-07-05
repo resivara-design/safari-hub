@@ -1,0 +1,58 @@
+import { Resend } from "resend";
+import { site } from "@/lib/site";
+import type { OrderLineItem } from "@/lib/payments/stripe-provider";
+
+let resendClient: Resend | null = null;
+
+function getResendClient(): Resend {
+  if (!process.env.RESEND_API_KEY) {
+    throw new Error("RESEND_API_KEY is not configured");
+  }
+  if (!resendClient) {
+    resendClient = new Resend(process.env.RESEND_API_KEY);
+  }
+  return resendClient;
+}
+
+export function isResendConfigured(): boolean {
+  return Boolean(process.env.RESEND_API_KEY);
+}
+
+export interface OrderNotificationPayload {
+  orderId: string;
+  customerEmail: string | null;
+  customerName: string;
+  phone: string;
+  shippingAddress: string;
+  amountTotal: number;
+  items: OrderLineItem[];
+}
+
+export async function sendOrderNotificationEmail(payload: OrderNotificationPayload): Promise<void> {
+  const resend = getResendClient();
+
+  const itemLines = payload.items
+    .map((item) => `- ${item.name} x${item.quantity} — £${item.amountTotal.toFixed(2)}`)
+    .join("\n");
+
+  const text = `New order received on Safari Hub!
+
+Order: ${payload.orderId}
+Customer: ${payload.customerName}
+Email: ${payload.customerEmail ?? "n/a"}
+Phone: ${payload.phone}
+Shipping address: ${payload.shippingAddress}
+
+Items:
+${itemLines}
+
+Total paid: £${payload.amountTotal.toFixed(2)}`;
+
+  await resend.emails.send({
+    from: "Safari Hub Orders <onboarding@resend.dev>",
+    to: site.contactEmail,
+    replyTo: payload.customerEmail ?? undefined,
+    subject: `New order ${payload.orderId} — £${payload.amountTotal.toFixed(2)}`,
+    text,
+  });
+}

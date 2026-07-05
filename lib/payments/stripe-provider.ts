@@ -59,3 +59,27 @@ export async function retrieveStripeSession(sessionId: string) {
   const stripe = getStripeClient();
   return stripe.checkout.sessions.retrieve(sessionId);
 }
+
+export interface OrderLineItem {
+  name: string;
+  quantity: number;
+  amountTotal: number;
+}
+
+export async function listStripeSessionLineItems(sessionId: string): Promise<OrderLineItem[]> {
+  const stripe = getStripeClient();
+  const lineItems = await stripe.checkout.sessions.listLineItems(sessionId, { limit: 100 });
+  return lineItems.data.map((item) => ({
+    name: item.description ?? "Item",
+    quantity: item.quantity ?? 1,
+    amountTotal: (item.amount_total ?? 0) / 100,
+  }));
+}
+
+export function constructStripeWebhookEvent(payload: string, signature: string): Stripe.Event {
+  if (!process.env.STRIPE_WEBHOOK_SECRET) {
+    throw new Error("STRIPE_WEBHOOK_SECRET is not configured");
+  }
+  const stripe = getStripeClient();
+  return stripe.webhooks.constructEvent(payload, signature, process.env.STRIPE_WEBHOOK_SECRET);
+}

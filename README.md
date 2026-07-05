@@ -47,18 +47,37 @@ Site-wide details (contact email, WhatsApp number, social links) live in
 
 ## Payments Integration
 
-Checkout is fully wired up end to end, but currently uses a mock payment
-provider that simulates a successful order. The integration seam lives in
-`lib/payments/`:
+Checkout uses Stripe Checkout (card, Apple Pay, Google Pay). The integration
+lives in `lib/payments/`:
 
 - `lib/payments/types.ts` — shared `CheckoutPayload` / `CheckoutResult` types
-- `lib/payments/mock-provider.ts` — current mock implementation
-- `lib/payments/index.ts` — `processCheckout()`, the single entry point used
-  by the checkout page
+- `lib/payments/stripe-provider.ts` — Stripe client, checkout session
+  creation, session/line-item retrieval, and webhook signature verification
+- `lib/payments/mock-provider.ts` — unused fallback, kept as a reference seam
 
-To add real payments, implement a `stripe-provider.ts` or `paypal-provider.ts`
-with the same function signature as `mock-provider.ts`, then swap it in inside
-`lib/payments/index.ts`. No page code needs to change.
+The checkout page (`app/checkout/CheckoutClient.tsx`) posts to
+`/api/checkout/stripe`, which creates a Stripe Checkout Session and redirects
+the customer to Stripe's hosted payment page.
+
+### Order notifications (Stripe webhook + Resend)
+
+Because a customer can close the tab after paying and before the
+`/checkout/success` redirect completes, order notification doesn't rely on
+that page alone. `app/api/webhooks/stripe/route.ts` listens for Stripe's
+`checkout.session.completed` event and emails the shop's contact address
+(`lib/site.ts` → `contactEmail`) with the order details, using
+`lib/email/order-notification.ts` (Resend).
+
+To wire this up in the Stripe Dashboard and Vercel:
+
+1. Deploy so the webhook URL exists: `https://<your-domain>/api/webhooks/stripe`
+2. Stripe Dashboard → Developers → Webhooks → Add endpoint → that URL,
+   subscribed to `checkout.session.completed` — copy the signing secret
+   (`whsec_...`) into `STRIPE_WEBHOOK_SECRET`
+3. Resend Dashboard → API Keys → create a key → into `RESEND_API_KEY`
+4. Add both to Vercel env vars (Production + Preview) and redeploy
+
+See `.env.local.example` for the full variable list.
 
 ## Tech Stack
 

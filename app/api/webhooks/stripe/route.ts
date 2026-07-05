@@ -20,6 +20,13 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Missing stripe-signature header" }, { status: 400 });
   }
 
+  if (!process.env.STRIPE_WEBHOOK_SECRET) {
+    console.error(
+      "Stripe webhook received but STRIPE_WEBHOOK_SECRET is not set for this environment — check Vercel env vars (Production/Preview) for a typo or missing value."
+    );
+    return NextResponse.json({ error: "Webhook not configured" }, { status: 500 });
+  }
+
   let event: Stripe.Event;
   try {
     event = constructStripeWebhookEvent(body, signature);

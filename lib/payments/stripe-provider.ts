@@ -83,3 +83,20 @@ export function constructStripeWebhookEvent(payload: string, signature: string):
   const stripe = getStripeClient();
   return stripe.webhooks.constructEvent(payload, signature, process.env.STRIPE_WEBHOOK_SECRET);
 }
+
+// Idempotency for webhook-triggered order emails, without needing a database:
+// Stripe delivers webhooks at-least-once, so the same event can arrive twice.
+// The PaymentIntent behind a Checkout Session already exists and persists for
+// the life of the order, so its metadata doubles as a durable "already sent" flag.
+export async function hasOrderEmailBeenSent(paymentIntentId: string): Promise<boolean> {
+  const stripe = getStripeClient();
+  const intent = await stripe.paymentIntents.retrieve(paymentIntentId);
+  return intent.metadata?.order_emails_sent === "true";
+}
+
+export async function markOrderEmailSent(paymentIntentId: string): Promise<void> {
+  const stripe = getStripeClient();
+  await stripe.paymentIntents.update(paymentIntentId, {
+    metadata: { order_emails_sent: "true" },
+  });
+}

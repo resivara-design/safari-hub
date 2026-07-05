@@ -48,13 +48,18 @@ ${itemLines}
 
 Total paid: £${payload.amountTotal.toFixed(2)}`;
 
-  await resend.emails.send({
+  const { error } = await resend.emails.send({
     from: "Safari Hub Orders <onboarding@resend.dev>",
     to: site.contactEmail,
     replyTo: payload.customerEmail ?? undefined,
     subject: `New order ${payload.orderId} — £${payload.amountTotal.toFixed(2)}`,
     text,
   });
+  // The Resend SDK resolves (rather than rejects) on API-level failures, so
+  // this must be checked explicitly or a bad send silently looks like success.
+  if (error) {
+    throw new Error(`Resend rejected store notification email: ${error.name} — ${error.message}`);
+  }
 }
 
 export async function sendCustomerConfirmationEmail(payload: OrderNotificationPayload): Promise<void> {
@@ -88,11 +93,14 @@ just reply to this email or contact us at ${site.contactEmail}.
 
 — Safari Hub`;
 
-  await resend.emails.send({
+  const { error } = await resend.emails.send({
     from: "Safari Hub <onboarding@resend.dev>",
     to: payload.customerEmail,
     replyTo: site.contactEmail,
     subject: `Your Safari Hub order ${payload.orderId} is confirmed`,
     text,
   });
+  if (error) {
+    throw new Error(`Resend rejected customer confirmation email: ${error.name} — ${error.message}`);
+  }
 }

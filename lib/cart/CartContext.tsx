@@ -8,7 +8,8 @@ import {
   type CartItem,
 } from "./cart-reducer";
 
-const STORAGE_KEY = "safari-hub-cart-v1";
+export const CART_STORAGE_KEY = "safari-hub-cart-v1";
+const STORAGE_KEY = CART_STORAGE_KEY;
 
 export interface CartContextValue {
   items: CartItem[];

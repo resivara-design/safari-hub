@@ -3,7 +3,7 @@ export const site = {
   tagline: "Authentic African Ingredients Delivered to Your Door",
   description:
     "Safari Hub is a premium online marketplace for authentic African food items and traditional cooking ingredients, sourced with care and delivered fresh.",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://safari-hub-sigma.vercel.app",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.safarihub.uk",
   contactEmail: "safarihubadminemail@gmail.com",
   phoneNumber: "024 7644 5621",
   address: "Coventry, United Kingdom",

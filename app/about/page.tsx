@@ -6,6 +6,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "About Us",
   description: `Learn about ${site.name}'s mission to bring authentic, ethically sourced African ingredients to kitchens across the UK.`,
+  alternates: { canonical: `${site.url}/about` },
 };
 
 export default function AboutPage() {

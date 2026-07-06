@@ -47,7 +47,7 @@ export default function Header() {
           <Image src="/images/logo.png" alt="Safari Hub" width={40} height={40} priority className="rounded-full" />
           <span className="flex flex-col leading-tight">
             Safari Hub
-            <span className="hidden font-body text-xs font-normal normal-case tracking-normal text-brown/60 md:block">
+            <span className="hidden font-body text-xs font-normal normal-case tracking-normal text-brown/80 md:block">
               Authentic African Ingredients
             </span>
           </span>

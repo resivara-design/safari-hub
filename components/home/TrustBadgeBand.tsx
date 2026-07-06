@@ -39,7 +39,7 @@ export default function TrustBadgeBand() {
             </svg>
             <div className="flex flex-col">
               <span className="text-sm font-bold tracking-wide text-ink">{item.label}</span>
-              <span className="text-xs text-brown/70">{item.subtext}</span>
+              <span className="text-xs text-brown/80">{item.subtext}</span>
             </div>
           </div>
         ))}

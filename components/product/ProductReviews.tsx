@@ -7,7 +7,7 @@ export default function ProductReviews({ slug }: { slug: string }) {
 
   if (productReviews.length === 0) {
     return (
-      <div className="text-brown/70">Be the first to review this product.</div>
+      <div className="text-brown/80">Be the first to review this product.</div>
     );
   }
 
@@ -16,7 +16,7 @@ export default function ProductReviews({ slug }: { slug: string }) {
       <div className="flex items-center gap-3">
         <StarRating rating={average} size="md" />
         <span className="font-heading text-2xl text-ink">{average}</span>
-        <span className="text-brown/70">
+        <span className="text-brown/80">
           ({productReviews.length} review{productReviews.length !== 1 ? "s" : ""})
         </span>
       </div>
@@ -29,7 +29,7 @@ export default function ProductReviews({ slug }: { slug: string }) {
             <StarRating rating={review.rating} />
             <p className="font-heading text-lg text-ink">{review.title}</p>
             <p className="text-sm text-brown">{review.body}</p>
-            <span className="text-xs text-brown/50">
+            <span className="text-xs text-brown/80">
               {review.author} ·{" "}
               {new Date(review.date).toLocaleDateString("en-GB", {
                 day: "numeric",

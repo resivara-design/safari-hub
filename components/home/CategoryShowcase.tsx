@@ -57,7 +57,7 @@ export default function CategoryShowcase() {
                   <span className="line-clamp-2 min-h-[2.25rem] font-heading text-sm font-bold text-black md:text-base">
                     {category.name}
                   </span>
-                  <span className="text-xs text-brown/70 md:text-sm">
+                  <span className="text-xs text-brown/80 md:text-sm">
                     From {formatPrice(fromPrice)}
                   </span>
                 </div>
@@ -68,7 +68,7 @@ export default function CategoryShowcase() {
 
         <div className="mt-10 flex flex-wrap justify-center gap-x-8 gap-y-3">
           {smallTrustItems.map((item) => (
-            <div key={item.label} className="flex items-center gap-2 text-sm text-brown/70">
+            <div key={item.label} className="flex items-center gap-2 text-sm text-brown/80">
               <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d={item.icon} />
               </svg>

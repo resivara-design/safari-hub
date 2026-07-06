@@ -50,7 +50,7 @@ export default function ShopClient() {
       {filtered.length === 0 ? (
         <div className="rounded-2xl border border-brown/10 bg-ivory p-12 text-center">
           <p className="font-heading text-xl text-ink">No products found</p>
-          <p className="mt-2 text-brown/70">
+          <p className="mt-2 text-brown/80">
             Try a different search term or browse all categories.
           </p>
         </div>

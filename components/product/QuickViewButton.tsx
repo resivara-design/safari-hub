@@ -82,7 +82,7 @@ export default function QuickViewButton({ product }: { product: Product }) {
                   <InStockBadge />
                 </div>
                 <h2 className="font-heading text-2xl text-ink">{product.name}</h2>
-                {product.weight && <span className="text-sm text-brown/60">{product.weight}</span>}
+                {product.weight && <span className="text-sm text-brown/80">{product.weight}</span>}
                 {reviewCount > 0 && <StarRating rating={average} count={reviewCount} />}
                 <p className="text-sm text-brown/80">{product.shortDescription}</p>
                 <span className="font-heading text-2xl font-bold text-deep-green">

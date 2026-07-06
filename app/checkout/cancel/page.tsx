@@ -1,5 +1,11 @@
+import type { Metadata } from "next";
 import Button from "@/components/ui/Button";
 import SectionHeading from "@/components/ui/SectionHeading";
+
+export const metadata: Metadata = {
+  title: "Payment Cancelled",
+  robots: { index: false, follow: false },
+};
 
 export default function CheckoutCancelPage() {
   return (

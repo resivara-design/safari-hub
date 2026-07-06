@@ -33,6 +33,7 @@ export function generateMetadata({ params }: ProductPageProps): Metadata {
   return {
     title: product.name,
     description: product.shortDescription,
+    alternates: { canonical: `${site.url}/product/${product.slug}` },
     openGraph: {
       title: `${product.name} | ${site.name}`,
       description: product.shortDescription,
@@ -77,11 +78,29 @@ export default function ProductPage({ params }: ProductPageProps) {
     ...(product.photo ? { image: `${site.url}${product.photo}` } : {}),
   };
 
+  const breadcrumbItems = [
+    { name: "Shop", url: `${site.url}/shop` },
+    ...(category ? [{ name: category.name, url: `${site.url}/shop?category=${category.slug}` }] : []),
+    { name: product.name, url: `${site.url}/product/${product.slug}` },
+  ];
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: breadcrumbItems.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: item.url,
+    })),
+  };
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
       <JsonLd data={productJsonLd} />
+      <JsonLd data={breadcrumbJsonLd} />
 
-      <nav className="mb-6 text-sm text-brown/60">
+      <nav className="mb-6 text-sm text-brown/80">
         <Link href="/shop" className="hover:text-deep-green">Shop</Link>
         {category && (
           <>
@@ -108,7 +127,7 @@ export default function ProductPage({ params }: ProductPageProps) {
         <div className="flex flex-col gap-4">
           {category && <Badge tone="green">{category.name}</Badge>}
           <h1 className="font-heading text-3xl text-ink md:text-4xl">{product.name}</h1>
-          {product.weight && <span className="text-sm text-brown/60">{product.weight}</span>}
+          {product.weight && <span className="text-sm text-brown/80">{product.weight}</span>}
           {reviewCount > 0 && <StarRating rating={averageRating} count={reviewCount} size="md" />}
           <span className="font-heading text-2xl font-bold text-deep-green">
             {formatPrice(product.price)}

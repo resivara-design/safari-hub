@@ -7,6 +7,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Shop",
   description: `Browse the full ${site.name} range of authentic African food items and traditional cooking ingredients.`,
+  alternates: { canonical: `${site.url}/shop` },
   openGraph: {
     title: `Shop | ${site.name}`,
     description: `Browse the full ${site.name} range of authentic African food items and traditional cooking ingredients.`,
@@ -23,7 +24,7 @@ export default function ShopPage() {
         align="left"
       />
       <div className="mt-8">
-        <Suspense fallback={<div className="text-brown/60">Loading products...</div>}>
+        <Suspense fallback={<div className="text-brown/80">Loading products...</div>}>
           <ShopClient />
         </Suspense>
       </div>

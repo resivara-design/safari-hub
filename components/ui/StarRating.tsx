@@ -27,7 +27,7 @@ export default function StarRating({ rating, count, size = "sm" }: StarRatingPro
         })}
       </div>
       {typeof count === "number" && (
-        <span className="text-xs text-brown/70">({count})</span>
+        <span className="text-xs text-brown/80">({count})</span>
       )}
     </div>
   );

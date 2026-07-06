@@ -6,6 +6,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Delivery",
   description: `Delivery zones, timeframes and fees for ${site.name} orders across the UK.`,
+  alternates: { canonical: `${site.url}/delivery` },
 };
 
 const zones = [
@@ -28,7 +29,7 @@ export default function DeliveryPage() {
       <div className="mt-10 overflow-x-auto rounded-2xl border border-brown/10 bg-ivory">
         <table className="w-full min-w-[480px] text-left text-sm">
           <thead>
-            <tr className="border-b border-brown/10 text-brown/60">
+            <tr className="border-b border-brown/10 text-brown/80">
               <th className="px-5 py-3 font-semibold">Zone</th>
               <th className="px-5 py-3 font-semibold">Timeframe</th>
               <th className="px-5 py-3 font-semibold">Fee</th>

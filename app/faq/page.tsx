@@ -6,6 +6,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "FAQ",
   description: `Answers to common questions about ordering, delivery and ingredient sourcing at ${site.name}.`,
+  alternates: { canonical: `${site.url}/faq` },
 };
 
 export default function FAQPage() {

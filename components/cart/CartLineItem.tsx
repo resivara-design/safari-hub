@@ -30,7 +30,7 @@ export default function CartLineItem({ item }: { item: CartItem }) {
         <Link href={`/product/${item.slug}`} className="font-heading text-lg text-ink hover:text-deep-green">
           {item.name}
         </Link>
-        <span className="text-sm text-brown/70">{formatPrice(item.price)} each</span>
+        <span className="text-sm text-brown/80">{formatPrice(item.price)} each</span>
         <FreeDeliveryBadge className="w-fit" />
         <button
           type="button"

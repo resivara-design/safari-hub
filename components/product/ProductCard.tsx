@@ -37,7 +37,7 @@ export default function ProductCard({ product }: { product: Product }) {
             <h3 className="line-clamp-2 min-h-[2.5rem] font-heading text-lg leading-tight text-black">{product.name}</h3>
             {!product.inStock && <Badge tone="orange">Sold Out</Badge>}
           </div>
-          {product.weight && <span className="text-xs text-brown/60">{product.weight}</span>}
+          {product.weight && <span className="text-xs text-brown/80">{product.weight}</span>}
           <p className="text-sm text-brown/80 line-clamp-2">{product.shortDescription}</p>
           {reviewCount > 0 && <StarRating rating={average} count={reviewCount} />}
           <div className="flex flex-wrap items-center gap-2">

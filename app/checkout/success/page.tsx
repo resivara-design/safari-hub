@@ -1,9 +1,15 @@
+import type { Metadata } from "next";
 import Button from "@/components/ui/Button";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { site } from "@/lib/site";
 import { formatPrice } from "@/lib/format";
 import { retrieveStripeSession, isStripeConfigured } from "@/lib/payments/stripe-provider";
 import ClearCartOnMount from "./ClearCartOnMount";
+
+export const metadata: Metadata = {
+  title: "Order Confirmed",
+  robots: { index: false, follow: false },
+};
 
 export default async function CheckoutSuccessPage({
   searchParams,
@@ -37,7 +43,7 @@ export default async function CheckoutSuccessPage({
       {amountTotal !== null && (
         <p className="mt-2 font-heading text-xl text-deep-green">Total paid: {formatPrice(amountTotal)}</p>
       )}
-      <p className="mt-1 text-sm text-brown/70">Order reference: {orderId}</p>
+      <p className="mt-1 text-sm text-brown/80">Order reference: {orderId}</p>
       <div className="mt-6">
         <Button href="/shop" variant="primary" size="lg">
           Continue Shopping

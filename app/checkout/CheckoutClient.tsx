@@ -95,7 +95,7 @@ export default function CheckoutClient() {
     return (
       <div className="mx-auto max-w-2xl px-4 py-20 text-center md:px-6">
         <SectionHeading eyebrow="Checkout" heading="Your cart is empty" />
-        <p className="mt-4 text-brown/70">Add something to your cart before checking out.</p>
+        <p className="mt-4 text-brown/80">Add something to your cart before checking out.</p>
         <div className="mt-6">
           <Button href="/shop" variant="primary" size="lg">
             Browse the Shop

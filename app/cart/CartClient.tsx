@@ -14,7 +14,7 @@ export default function CartClient() {
     return (
       <div className="mx-auto max-w-3xl px-4 py-20 text-center md:px-6">
         <SectionHeading eyebrow="Your Cart" heading="Your cart is empty" />
-        <p className="mt-4 text-brown/70">
+        <p className="mt-4 text-brown/80">
           Looks like you haven&apos;t added anything yet. Explore the shop to find your
           next favourite ingredient.
         </p>

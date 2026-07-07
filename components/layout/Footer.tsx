@@ -23,10 +23,10 @@ export default function Footer() {
         <div className="flex flex-col gap-3">
           <span className="flex items-center gap-2 font-fancy text-2xl">
             <Image src="/images/logo.png" alt="" width={32} height={32} className="rounded-full" aria-hidden="true" />
-            Safari Hub
+            {site.displayName}
           </span>
           <p className="text-sm text-cream/70">
-            Authentic African ingredients carefully sourced and delivered fresh to your door.
+            {site.tagline}, carefully sourced and delivered fresh to your door.
           </p>
           <div className="mt-2 flex items-center gap-3">
             <a href={site.social.facebook} aria-label="Facebook" className={iconLinkClasses}>

@@ -1,6 +1,11 @@
 export const site = {
   name: "Safari Hub",
-  tagline: "Authentic African Ingredients Delivered to Your Door",
+  // Customer-facing marketing brand — kept distinct from `name` so the
+  // legal/contact identity (feed.xml g:brand, JSON-LD Organization, emails)
+  // stays exactly "Safari Hub" and doesn't drift out of sync with what's
+  // already registered in Google Merchant Center.
+  displayName: "Safari Hub Tastebuds",
+  tagline: "Authentic African Foods & Ingredients",
   description:
     "Safari Hub is a premium online marketplace for authentic African food items and traditional cooking ingredients, sourced with care and delivered fresh.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.safarihub.uk",

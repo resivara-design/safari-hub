@@ -11,14 +11,23 @@ import CategoryNavRow from "@/components/layout/CategoryNavRow";
 import FadeInSection from "@/components/motion/FadeInSection";
 import { site } from "@/lib/site";
 
+const homeTitle = `${site.displayName} | ${site.tagline} UK`;
+const homeDescription =
+  "Shop authentic African foods, spices, herbs, snacks and meal kits online in the UK. Safari Hub Tastebuds sources premium, ethically-grown African ingredients and delivers them fresh to your door nationwide.";
+
 export const metadata: Metadata = {
-  title: `${site.name} | ${site.tagline}`,
-  description: site.description,
+  title: { absolute: homeTitle },
+  description: homeDescription,
   alternates: { canonical: site.url },
   openGraph: {
-    title: `${site.name} | ${site.tagline}`,
-    description: site.description,
+    title: homeTitle,
+    description: homeDescription,
     url: site.url,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: homeTitle,
+    description: homeDescription,
   },
 };
 

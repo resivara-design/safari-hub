@@ -8,6 +8,7 @@ import MobileNav from "./MobileNav";
 import HeaderSearchBar from "./HeaderSearchBar";
 import TopContactBar from "./TopContactBar";
 import MobileAnnouncementBar from "./MobileAnnouncementBar";
+import { site } from "@/lib/site";
 
 const navLinks = [
   { href: "/shop", label: "Shop" },
@@ -44,11 +45,11 @@ export default function Header() {
           href="/"
           className="flex shrink-0 items-center gap-2 rounded font-fancy text-xl tracking-wide text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-cream md:text-2xl"
         >
-          <Image src="/images/logo.png" alt="Safari Hub" width={40} height={40} priority className="rounded-full" />
+          <Image src="/images/logo.png" alt={site.displayName} width={40} height={40} priority className="rounded-full" />
           <span className="flex flex-col leading-tight">
-            Safari Hub
+            {site.displayName}
             <span className="hidden font-body text-xs font-normal normal-case tracking-normal text-brown/80 md:block">
-              Authentic African Ingredients
+              {site.tagline}
             </span>
           </span>
         </Link>

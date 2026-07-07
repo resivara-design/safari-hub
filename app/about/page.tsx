@@ -14,14 +14,14 @@ export default function AboutPage() {
     <div className="mx-auto max-w-4xl px-4 py-16 md:px-6 md:py-24">
       <SectionHeading
         eyebrow="Our Story"
-        heading="About Safari Hub"
-        subtext="Bringing the true taste of home to kitchens across the UK."
+        heading={`About ${site.displayName}`}
+        subtext={`${site.tagline} — bringing the true taste of home to kitchens across the UK.`}
         align="left"
       />
 
       <div className="mt-10 flex flex-col gap-6 text-brown">
         <p>
-          Safari Hub was founded on a simple idea: that authentic African ingredients
+          {site.displayName} was founded on a simple idea: that authentic African ingredients
           shouldn&apos;t be hard to find. What started as a search for the same bitter kola
           and crayfish our own families grew up with became a mission to make those
           ingredients easy to access for everyone, wherever they call home.

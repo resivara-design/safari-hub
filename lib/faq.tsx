@@ -1,6 +1,10 @@
+import type { ReactNode } from "react";
+import Link from "next/link";
+import { returnsPolicySummary } from "./returns-policy";
+
 export interface FAQ {
   question: string;
-  answer: string;
+  answer: ReactNode;
 }
 
 export const faqs: FAQ[] = [
@@ -26,8 +30,15 @@ export const faqs: FAQ[] = [
   },
   {
     question: "What is your returns policy?",
-    answer:
-      "As these are food products, we can't accept returns once an order has been delivered. If anything arrives damaged or not as described, contact us within 48 hours and we'll sort out a replacement or refund.",
+    answer: (
+      <>
+        {returnsPolicySummary} Full details are available in our{" "}
+        <Link href="/returns" className="text-deep-green underline">
+          Returns &amp; Refund Policy
+        </Link>
+        .
+      </>
+    ),
   },
   {
     question: "What payment methods do you accept?",

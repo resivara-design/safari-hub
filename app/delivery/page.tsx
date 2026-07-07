@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Badge from "@/components/ui/Badge";
 import { site } from "@/lib/site";
+import { returnsPolicySummary } from "@/lib/returns-policy";
 
 export const metadata: Metadata = {
   title: "Delivery",
@@ -64,10 +65,12 @@ export default function DeliveryPage() {
             <Badge tone="gold">Freshness &amp; Returns</Badge>
           </div>
           <p>
-            All our products are packed to preserve freshness in transit. As these are
-            food items, we&apos;re unable to accept returns once delivered — but if
-            anything arrives damaged or isn&apos;t as described, let us know within 48
-            hours and we&apos;ll arrange a replacement or refund.
+            All our products are packed to preserve freshness in transit. {returnsPolicySummary}{" "}
+            Full details are available in our{" "}
+            <a href="/returns" className="text-deep-green underline">
+              Returns &amp; Refund Policy
+            </a>
+            .
           </p>
         </div>
       </div>

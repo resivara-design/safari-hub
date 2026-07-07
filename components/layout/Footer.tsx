@@ -68,7 +68,7 @@ export default function Footer() {
           <Link href="/about" className={linkClasses}>About Us</Link>
           <Link href="/shop" className={linkClasses}>Shop All Products</Link>
           <Link href="/delivery" className={linkClasses}>Delivery Information</Link>
-          <Link href="/faq" className={linkClasses}>Returns &amp; Refunds</Link>
+          <Link href="/returns" className={linkClasses}>Returns &amp; Refund Policy</Link>
           <Link href="/faq" className={linkClasses}>Terms &amp; Conditions</Link>
           <Link href="/faq" className={linkClasses}>Privacy Policy</Link>
         </div>
@@ -79,7 +79,7 @@ export default function Footer() {
           <Link href="/faq" className={linkClasses}>FAQ</Link>
           <Link href="/contact" className={linkClasses}>Track Your Order</Link>
           <Link href="/delivery" className={linkClasses}>Delivery Information</Link>
-          <Link href="/faq" className={linkClasses}>Returns &amp; Refunds</Link>
+          <Link href="/returns" className={linkClasses}>Returns &amp; Refund Policy</Link>
         </div>
 
         <div className="flex flex-col gap-3">

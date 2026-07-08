@@ -4,7 +4,7 @@ import PatternDivider from "@/components/ui/PatternDivider";
 import { site } from "@/lib/site";
 
 const aboutTitle = `About ${site.displayName}`;
-const aboutDescription = `Learn about ${site.displayName}'s mission to bring authentic, ethically sourced African foods and ingredients to kitchens across the UK.`;
+const aboutDescription = `Learn about our mission at ${site.displayName} — bringing authentic, ethically sourced African foods and ingredients to kitchens across the UK.`;
 
 export const metadata: Metadata = {
   // absolute bypasses the root layout's "%s | Safari Hub" template, avoiding

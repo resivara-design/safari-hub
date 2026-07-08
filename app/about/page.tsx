@@ -3,10 +3,20 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import PatternDivider from "@/components/ui/PatternDivider";
 import { site } from "@/lib/site";
 
+const aboutTitle = `About ${site.displayName}`;
+const aboutDescription = `Learn about ${site.displayName}'s mission to bring authentic, ethically sourced African foods and ingredients to kitchens across the UK.`;
+
 export const metadata: Metadata = {
-  title: "About Us",
-  description: `Learn about ${site.name}'s mission to bring authentic, ethically sourced African ingredients to kitchens across the UK.`,
+  // absolute bypasses the root layout's "%s | Safari Hub" template, avoiding
+  // a redundant "About Safari Hub Tastebuds | Safari Hub" tab title.
+  title: { absolute: aboutTitle },
+  description: aboutDescription,
   alternates: { canonical: `${site.url}/about` },
+  openGraph: {
+    title: aboutTitle,
+    description: aboutDescription,
+    url: `${site.url}/about`,
+  },
 };
 
 export default function AboutPage() {

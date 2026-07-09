@@ -47,7 +47,13 @@ export default function Header() {
         >
           <Image src="/images/logo.png" alt={site.displayName} width={40} height={40} priority className="rounded-full" />
           <span className="flex flex-col leading-tight">
-            {site.displayName}
+            {/* Full "Safari Hub Tastebuds" crowds the mobile header row
+                (competing with account/cart/menu icons on the same line),
+                so only the short form shows below sm; full name from sm up. */}
+            <span>
+              {site.name}
+              <span className="hidden sm:inline"> Tastebuds</span>
+            </span>
             <span className="hidden font-body text-xs font-normal normal-case tracking-normal text-brown/80 md:block">
               {site.tagline}
             </span>

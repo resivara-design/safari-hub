@@ -29,20 +29,26 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} | ${site.tagline}`,
-    template: `%s | ${site.name}`,
+    default: `${site.displayName} | ${site.tagline}`,
+    // Applies to every page that sets a plain string title (e.g. "Cart" ->
+    // "Cart | Safari Hub Tastebuds"), so the marketing brand shows up
+    // consistently across the whole site's tab titles and search results.
+    // site.name ("Safari Hub") stays untouched here on purpose — it's still
+    // used for feed.xml's g:brand, JSON-LD Organization, and emails, so it
+    // can't silently drift from what's already on file with Merchant Center.
+    template: `%s | ${site.displayName}`,
   },
   description: site.description,
   openGraph: {
-    title: `${site.name} | ${site.tagline}`,
+    title: `${site.displayName} | ${site.tagline}`,
     description: site.description,
     url: site.url,
-    siteName: site.name,
+    siteName: site.displayName,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} | ${site.tagline}`,
+    title: `${site.displayName} | ${site.tagline}`,
     description: site.description,
   },
 };

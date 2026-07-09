@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { site } from "@/lib/site";
 
 export default function Hero() {
   return (
@@ -16,7 +17,7 @@ export default function Hero() {
         >
           <Image
             src="/images/banner.jpg"
-            alt="Safari Hub's full range of authentic African ingredients"
+            alt={`An assortment of authentic African foods and ingredients from ${site.displayName}`}
             width={1774}
             height={887}
             className="h-auto w-full"
@@ -33,7 +34,7 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }}
           className="font-fancy text-2xl leading-tight text-ink sm:text-3xl md:text-5xl"
         >
-          Authentic African Ingredients Delivered to Your Door
+          {site.tagline}
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -41,8 +42,8 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.25, ease: "easeOut" }}
           className="mx-auto mt-4 max-w-xl text-base text-brown sm:text-lg"
         >
-          Premium quality spices, herbs, and traditional ingredients for your authentic
-          African dishes.
+          Shop premium spices, herbs, snacks and meal kits — the authentic taste of home,
+          delivered UK-wide by {site.displayName}.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 20 }}

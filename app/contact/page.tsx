@@ -3,10 +3,17 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import ContactForm from "./ContactForm";
 import { site } from "@/lib/site";
 
+const contactDescription = `Get in touch with the ${site.displayName} team by email, WhatsApp or our contact form.`;
+
 export const metadata: Metadata = {
   title: "Contact Us",
-  description: `Get in touch with the ${site.name} team by email, WhatsApp or our contact form.`,
+  description: contactDescription,
   alternates: { canonical: `${site.url}/contact` },
+  openGraph: {
+    title: `Contact Us | ${site.displayName}`,
+    description: contactDescription,
+    url: `${site.url}/contact`,
+  },
 };
 
 export default function ContactPage() {

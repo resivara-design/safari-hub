@@ -2,10 +2,17 @@ import type { Metadata } from "next";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { site } from "@/lib/site";
 
+const returnsDescription = `${site.displayName}'s returns and refund policy for food products, in line with UK consumer law.`;
+
 export const metadata: Metadata = {
   title: "Returns & Refund Policy",
-  description: `${site.name}'s returns and refund policy for food products, in line with UK consumer law.`,
+  description: returnsDescription,
   alternates: { canonical: `${site.url}/returns` },
+  openGraph: {
+    title: `Returns & Refund Policy | ${site.displayName}`,
+    description: returnsDescription,
+    url: `${site.url}/returns`,
+  },
 };
 
 export default function ReturnsPage() {

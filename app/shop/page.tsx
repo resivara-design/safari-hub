@@ -4,13 +4,16 @@ import ShopClient from "./ShopClient";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { site } from "@/lib/site";
 
+const shopDescription = `Browse the full ${site.displayName} range of authentic African food items and traditional cooking ingredients.`;
+
 export const metadata: Metadata = {
   title: "Shop",
-  description: `Browse the full ${site.name} range of authentic African food items and traditional cooking ingredients.`,
+  description: shopDescription,
   alternates: { canonical: `${site.url}/shop` },
   openGraph: {
-    title: `Shop | ${site.name}`,
-    description: `Browse the full ${site.name} range of authentic African food items and traditional cooking ingredients.`,
+    title: `Shop | ${site.displayName}`,
+    description: shopDescription,
+    url: `${site.url}/shop`,
   },
 };
 

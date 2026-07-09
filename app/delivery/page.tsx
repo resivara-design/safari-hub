@@ -4,10 +4,17 @@ import Badge from "@/components/ui/Badge";
 import { site } from "@/lib/site";
 import { returnsPolicySummary } from "@/lib/returns-policy";
 
+const deliveryDescription = `Delivery zones, timeframes and fees for ${site.displayName} orders across the UK.`;
+
 export const metadata: Metadata = {
   title: "Delivery",
-  description: `Delivery zones, timeframes and fees for ${site.name} orders across the UK.`,
+  description: deliveryDescription,
   alternates: { canonical: `${site.url}/delivery` },
+  openGraph: {
+    title: `Delivery | ${site.displayName}`,
+    description: deliveryDescription,
+    url: `${site.url}/delivery`,
+  },
 };
 
 const zones = [

@@ -3,10 +3,17 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import { faqs } from "@/lib/faq";
 import { site } from "@/lib/site";
 
+const faqDescription = `Answers to common questions about ordering, delivery and ingredient sourcing at ${site.displayName}.`;
+
 export const metadata: Metadata = {
   title: "FAQ",
-  description: `Answers to common questions about ordering, delivery and ingredient sourcing at ${site.name}.`,
+  description: faqDescription,
   alternates: { canonical: `${site.url}/faq` },
+  openGraph: {
+    title: `FAQ | ${site.displayName}`,
+    description: faqDescription,
+    url: `${site.url}/faq`,
+  },
 };
 
 export default function FAQPage() {

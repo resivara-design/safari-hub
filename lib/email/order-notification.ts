@@ -104,3 +104,32 @@ just reply to this email or contact us at ${site.contactEmail}.
     throw new Error(`Resend rejected customer confirmation email: ${error.name} — ${error.message}`);
   }
 }
+
+export interface ContactFormPayload {
+  name: string;
+  email: string;
+  message: string;
+}
+
+export async function sendContactFormEmail(payload: ContactFormPayload): Promise<void> {
+  const resend = getResendClient();
+
+  const text = `New contact form submission on ${site.displayName}
+
+Name: ${payload.name}
+Email: ${payload.email}
+
+Message:
+${payload.message}`;
+
+  const { error } = await resend.emails.send({
+    from: `${site.displayName} Contact Form <onboarding@resend.dev>`,
+    to: site.contactEmail,
+    replyTo: payload.email,
+    subject: `New contact form message from ${payload.name}`,
+    text,
+  });
+  if (error) {
+    throw new Error(`Resend rejected contact form email: ${error.name} — ${error.message}`);
+  }
+}

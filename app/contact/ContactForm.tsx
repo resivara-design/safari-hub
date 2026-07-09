@@ -16,12 +16,14 @@ export default function ContactForm() {
   const [form, setForm] = useState<FormState>(initialState);
   const [errors, setErrors] = useState<Partial<FormState>>({});
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   function update(field: keyof FormState, value: string) {
     setForm((prev) => ({ ...prev, [field]: value }));
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const nextErrors: Partial<FormState> = {};
     if (!form.name.trim()) nextErrors.name = "Please enter your name.";
@@ -36,7 +38,26 @@ export default function ContactForm() {
     }
 
     setErrors({});
-    setSubmitted(true);
+    setSubmitError(null);
+    setSubmitting(true);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        setSubmitError(data.error || "Something went wrong. Please try again.");
+        setSubmitting(false);
+        return;
+      }
+      setSubmitted(true);
+    } catch {
+      setSubmitError("Something went wrong sending your message. Please try again.");
+      setSubmitting(false);
+    }
   }
 
   if (submitted) {
@@ -78,8 +99,13 @@ export default function ContactForm() {
         error={errors.message}
         required
       />
-      <Button type="submit" variant="primary" size="lg" className="w-fit">
-        Send Message
+      {submitError && (
+        <div className="rounded-xl border border-burnt-orange/30 bg-burnt-orange/10 p-3 text-sm text-burnt-orange-dark">
+          {submitError}
+        </div>
+      )}
+      <Button type="submit" variant="primary" size="lg" className="w-fit" disabled={submitting}>
+        {submitting ? "Sending..." : "Send Message"}
       </Button>
     </form>
   );

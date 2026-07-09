@@ -7,6 +7,7 @@ import Badge from "@/components/ui/Badge";
 import FreeDeliveryBadge from "@/components/ui/FreeDeliveryBadge";
 import InStockBadge from "@/components/ui/InStockBadge";
 import AddToCartButton from "@/components/product/AddToCartButton";
+import ShareButtons from "@/components/product/ShareButtons";
 import ProductReviews from "@/components/product/ProductReviews";
 import ProductGrid from "@/components/product/ProductGrid";
 import ProductCard from "@/components/product/ProductCard";
@@ -30,14 +31,34 @@ export function generateMetadata({ params }: ProductPageProps): Metadata {
   const product = getProductBySlug(params.slug);
   if (!product) return {};
 
+  const shareTitle = `${product.name} — ${formatPrice(product.price)} | ${site.displayName}`;
+  const shareDescription = `${product.shortDescription} ${site.tagline} — shop authentic African foods at ${site.displayName}.`;
+  const imageUrl = product.photo ? `${site.url}${product.photo}` : undefined;
+
   return {
     title: product.name,
     description: product.shortDescription,
     alternates: { canonical: `${site.url}/product/${product.slug}` },
     openGraph: {
-      title: `${product.name} | ${site.name}`,
-      description: product.shortDescription,
-      ...(product.photo ? { images: [`${site.url}${product.photo}`] } : {}),
+      title: shareTitle,
+      description: shareDescription,
+      url: `${site.url}/product/${product.slug}`,
+      siteName: site.displayName,
+      ...(imageUrl ? { images: [{ url: imageUrl, width: 788, height: 1400, alt: product.name }] } : {}),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: shareTitle,
+      description: shareDescription,
+      ...(imageUrl ? { images: [imageUrl] } : {}),
+    },
+    // Open Graph's product extension — not universally rendered by link
+    // previews, but picked up by platforms (Pinterest, some crawlers) that
+    // do parse it, and costs nothing to include alongside the title/description
+    // text that WhatsApp/Facebook/Twitter actually show.
+    other: {
+      "product:price:amount": product.price.toFixed(2),
+      "product:price:currency": "GBP",
     },
   };
 }
@@ -139,6 +160,9 @@ export default function ProductPage({ params }: ProductPageProps) {
           </div>
           <div className="mt-2">
             <AddToCartButton product={product} />
+          </div>
+          <div className="mt-2">
+            <ShareButtons slug={product.slug} name={product.name} price={product.price} />
           </div>
         </div>
       </div>

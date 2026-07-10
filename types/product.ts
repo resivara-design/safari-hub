@@ -26,4 +26,11 @@ export interface Product {
   image: ProductImagePlaceholder;
   photo?: string;
   weight?: string;
+  // Taken from product packaging where available — see /product-information.
+  // Deliberately optional and NOT auto-filled: incorrect allergen data is a
+  // real safety risk, so a missing value must render an explicit "check the
+  // label" notice rather than silently omitting the section.
+  ingredients?: string;
+  allergens?: string;
+  storageInstructions?: string;
 }

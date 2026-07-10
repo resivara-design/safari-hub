@@ -6,6 +6,8 @@ import Footer from "@/components/layout/Footer";
 import { CartProvider } from "@/lib/cart/CartContext";
 import JsonLd from "@/components/seo/JsonLd";
 import GrainOverlay from "@/components/ui/GrainOverlay";
+import { CookieConsentProvider } from "@/components/cookies/CookieConsentContext";
+import CookieConsentBanner from "@/components/cookies/CookieConsentBanner";
 import { site } from "@/lib/site";
 
 const fraunces = Fraunces({
@@ -83,13 +85,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         <JsonLd data={organizationJsonLd} />
         <JsonLd data={websiteJsonLd} />
-        <CartProvider>
-          <Header />
-          <main id="main-content" className="flex-1">
-            {children}
-          </main>
-          <Footer />
-        </CartProvider>
+        <CookieConsentProvider>
+          <CartProvider>
+            <Header />
+            <main id="main-content" className="flex-1">
+              {children}
+            </main>
+            <Footer />
+          </CartProvider>
+          <CookieConsentBanner />
+        </CookieConsentProvider>
       </body>
     </html>
   );

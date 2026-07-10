@@ -3,6 +3,7 @@ import Image from "next/image";
 import PatternDivider from "@/components/ui/PatternDivider";
 import TrustBadges from "@/components/ui/TrustBadges";
 import PaymentIcons from "@/components/ui/PaymentIcons";
+import CookieSettingsLink from "@/components/cookies/CookieSettingsLink";
 import { site } from "@/lib/site";
 
 const linkClasses =
@@ -69,8 +70,10 @@ export default function Footer() {
           <Link href="/shop" className={linkClasses}>Shop All Products</Link>
           <Link href="/delivery" className={linkClasses}>Delivery Information</Link>
           <Link href="/returns" className={linkClasses}>Returns &amp; Refund Policy</Link>
-          <Link href="/faq" className={linkClasses}>Terms &amp; Conditions</Link>
-          <Link href="/faq" className={linkClasses}>Privacy Policy</Link>
+          <Link href="/terms" className={linkClasses}>Terms &amp; Conditions</Link>
+          <Link href="/privacy" className={linkClasses}>Privacy Policy</Link>
+          <Link href="/cookies" className={linkClasses}>Cookie Policy</Link>
+          <CookieSettingsLink className={`${linkClasses} text-left`} />
         </div>
 
         <div className="flex flex-col gap-3">
@@ -80,6 +83,7 @@ export default function Footer() {
           <Link href="/contact" className={linkClasses}>Track Your Order</Link>
           <Link href="/delivery" className={linkClasses}>Delivery Information</Link>
           <Link href="/returns" className={linkClasses}>Returns &amp; Refund Policy</Link>
+          <Link href="/product-information" className={linkClasses}>Product Information</Link>
         </div>
 
         <div className="flex flex-col gap-3">

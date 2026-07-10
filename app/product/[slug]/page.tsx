@@ -168,6 +168,27 @@ export default function ProductPage({ params }: ProductPageProps) {
       </div>
 
       <section className="mt-16">
+        <SectionHeading eyebrow="Know Before You Buy" heading="Product Details" align="left" />
+        <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <ProductDetailCard label="Ingredients" value={product.ingredients} />
+          <ProductDetailCard label="Allergens" value={product.allergens} />
+          <ProductDetailCard label="Storage" value={product.storageInstructions} />
+        </div>
+        <p className="mt-4 text-sm text-brown/80">
+          As a retailer, we list this information from the product packaging where it&apos;s
+          available to us. Always check the label before consumption, and{" "}
+          <Link href="/contact" className="text-deep-green underline">
+            contact us
+          </Link>{" "}
+          before ordering if you need more detail — see our{" "}
+          <Link href="/product-information" className="text-deep-green underline">
+            Product Information
+          </Link>{" "}
+          page for full guidance.
+        </p>
+      </section>
+
+      <section className="mt-16">
         <SectionHeading eyebrow="Reviews" heading="Customer Reviews" align="left" />
         <div className="mt-6">
           <ProductReviews slug={product.slug} />
@@ -185,6 +206,25 @@ export default function ProductPage({ params }: ProductPageProps) {
             </ProductGrid>
           </div>
         </section>
+      )}
+    </div>
+  );
+}
+
+function ProductDetailCard({ label, value }: { label: string; value?: string }) {
+  return (
+    <div className="rounded-2xl border border-brown/10 bg-ivory p-5">
+      <p className="text-xs font-semibold uppercase tracking-wide text-burnt-orange">{label}</p>
+      {value ? (
+        <p className="mt-2 text-sm text-brown">{value}</p>
+      ) : (
+        <p className="mt-2 text-sm text-brown/80">
+          Not listed for this product — please check the packaging or{" "}
+          <Link href="/contact" className="text-deep-green underline">
+            contact us
+          </Link>{" "}
+          before ordering.
+        </p>
       )}
     </div>
   );

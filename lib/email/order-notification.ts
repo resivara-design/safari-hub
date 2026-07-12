@@ -35,7 +35,7 @@ export async function sendOrderNotificationEmail(payload: OrderNotificationPaylo
     .map((item) => `- ${item.name} x${item.quantity} — £${item.amountTotal.toFixed(2)}`)
     .join("\n");
 
-  const text = `New order received on Safari Hub!
+  const text = `New order received on ${site.displayName}!
 
 Order: ${payload.orderId}
 Customer: ${payload.customerName}
@@ -49,7 +49,7 @@ ${itemLines}
 Total paid: £${payload.amountTotal.toFixed(2)}`;
 
   const { error } = await resend.emails.send({
-    from: "Safari Hub Orders <onboarding@resend.dev>",
+    from: `${site.displayName} Orders <onboarding@resend.dev>`,
     to: site.contactEmail,
     replyTo: payload.customerEmail ?? undefined,
     subject: `New order ${payload.orderId} — £${payload.amountTotal.toFixed(2)}`,
@@ -78,7 +78,7 @@ export async function sendCustomerConfirmationEmail(payload: OrderNotificationPa
 
   const text = `Hi ${payload.customerName},
 
-Thanks for your order from Safari Hub! Here's a summary:
+Thanks for your order from ${site.displayName}! Here's a summary:
 
 Order reference: ${payload.orderId}
 Shipping to: ${payload.shippingAddress}
@@ -91,13 +91,13 @@ Total paid: £${payload.amountTotal.toFixed(2)}
 We'll be in touch once your order is on its way. If you have any questions,
 just reply to this email or contact us at ${site.contactEmail}.
 
-— Safari Hub`;
+— ${site.displayName}`;
 
   const { error } = await resend.emails.send({
-    from: "Safari Hub <onboarding@resend.dev>",
+    from: `${site.displayName} <onboarding@resend.dev>`,
     to: payload.customerEmail,
     replyTo: site.contactEmail,
-    subject: `Your Safari Hub order ${payload.orderId} is confirmed`,
+    subject: `Your ${site.displayName} order ${payload.orderId} is confirmed`,
     text,
   });
   if (error) {

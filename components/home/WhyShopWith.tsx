@@ -1,10 +1,11 @@
 import SectionHeading from "@/components/ui/SectionHeading";
 import PatternBackground from "@/components/ui/PatternBackground";
+import { site } from "@/lib/site";
 
 const values = [
   {
     title: "Authentic Sourcing",
-    description: "Every product is sourced directly from trusted growers and trader partners across Africa.",
+    description: "Every product is carefully sourced from trusted suppliers across Africa.",
     icon: "M12 2l3 6 6 1-4.5 4.4L18 20l-6-3.4L6 20l1.5-6.6L3 9l6-1z",
   },
   {
@@ -29,7 +30,7 @@ export default function WhyShopWith() {
     <section className="relative overflow-hidden bg-white py-12 md:py-20">
       <PatternBackground className="text-deep-green/[0.05]" />
       <div className="mx-auto max-w-6xl px-4 md:px-6">
-        <SectionHeading eyebrow="Why Safari Hub" heading="Why Shop With Us" />
+        <SectionHeading eyebrow={`Why ${site.displayName}`} heading="Why Shop With Us" />
         <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {values.map((value) => (
             <div key={value.title} className="flex flex-col items-center gap-3 rounded-2xl border border-brown/10 bg-ivory p-6 text-center">

@@ -13,7 +13,7 @@ import { site } from "@/lib/site";
 
 const homeTitle = `${site.displayName} | ${site.tagline} UK`;
 const homeDescription =
-  "Shop authentic African foods, spices, herbs, snacks and meal kits online in the UK. Safari Hub Tastebuds sources premium, ethically-grown African ingredients and delivers them fresh to your door nationwide.";
+  "Shop authentic African foods, spices, herbs, snacks and meal kits online in the UK. Safari Hub Tastebuds retails premium, ethically sourced African ingredients from trusted suppliers, delivered fresh to your door nationwide.";
 
 export const metadata: Metadata = {
   title: { absolute: homeTitle },

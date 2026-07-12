@@ -34,14 +34,15 @@ export default function AboutPage() {
           {site.displayName} was founded on a simple idea: that authentic African ingredients
           shouldn&apos;t be hard to find. What started as a search for the same bitter kola
           and crayfish our own families grew up with became a mission to make those
-          ingredients easy to access for everyone, wherever they call home.
+          ingredients easy to access for everyone, wherever they call home. We retail authentic
+          African snacks, spices and cooking ingredients sourced from trusted suppliers.
         </p>
         <p>
-          Today, we work directly with trusted growers and trader partners across West
-          and East Africa to source spices, dried leaves, nuts and meal kits that carry
-          real flavour and real heritage. Every batch is checked for freshness and
-          quality before it reaches our warehouse, so what lands on your doorstep is as
-          close as possible to what you&apos;d find at a market stall back home.
+          We carefully select spices, dried leaves, nuts and meal kits from trusted suppliers
+          across West and East Africa, chosen for real flavour and real heritage. Every batch is
+          checked for freshness and quality before it reaches our warehouse, so what lands on
+          your doorstep is as close as possible to what you&apos;d find at a market stall back
+          home.
         </p>
 
         <PatternDivider className="my-4" />
@@ -56,9 +57,8 @@ export default function AboutPage() {
         <h2 className="font-heading text-2xl text-ink">Sourcing &amp; Authenticity</h2>
         <p>
           Every product in our catalogue is chosen for its quality and provenance. We
-          prioritise relationships with growers and suppliers who share our standards,
-          and we&apos;re always happy to talk through where a particular ingredient comes
-          from — just get in touch.
+          prioritise trusted suppliers who share our standards, and we&apos;re always happy
+          to talk through where a particular ingredient comes from — just get in touch.
         </p>
       </div>
     </div>

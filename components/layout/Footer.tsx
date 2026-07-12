@@ -122,10 +122,10 @@ export default function Footer() {
           <TrustBadges tone="dark" className="justify-center md:justify-start" />
           <div className="flex flex-col items-center gap-4 border-t border-cream/10 pt-6 md:flex-row md:justify-between">
             <span className="text-xs text-cream/50">
-              &copy; {new Date().getFullYear()} Safari Hub. All rights reserved.
+              &copy; {new Date().getFullYear()} {site.displayName}. All rights reserved.
             </span>
             <PaymentIcons />
-            <span className="text-xs text-cream/50">Website by Safari Hub</span>
+            <span className="text-xs text-cream/50">Website by {site.displayName}</span>
           </div>
         </div>
       </div>

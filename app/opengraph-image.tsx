@@ -22,13 +22,14 @@ export default async function Image() {
       >
         <div
           style={{
-            fontSize: 76,
+            fontSize: 64,
             fontWeight: 700,
             color: "#F8F4EC",
             letterSpacing: -1,
+            textAlign: "center",
           }}
         >
-          {site.name}
+          {site.displayName}
         </div>
         <div
           style={{

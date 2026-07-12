@@ -42,7 +42,7 @@ export default function TopContactBar() {
             <circle cx="6.5" cy="19" r="1.5" fill="currentColor" stroke="none" />
             <circle cx="17.5" cy="19" r="1.5" fill="currentColor" stroke="none" />
           </svg>
-          <span>Free UK delivery on orders over £15</span>
+          <span>Free UK Delivery on All Orders</span>
         </div>
       </div>
     </div>

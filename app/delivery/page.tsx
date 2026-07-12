@@ -4,7 +4,7 @@ import Badge from "@/components/ui/Badge";
 import { site } from "@/lib/site";
 import { returnsPolicySummary } from "@/lib/returns-policy";
 
-const deliveryDescription = `Delivery zones, timeframes and fees for ${site.displayName} orders across the UK.`;
+const deliveryDescription = `Free UK delivery on all ${site.displayName} orders — delivery zones and timeframes across the UK.`;
 
 export const metadata: Metadata = {
   title: "Delivery",
@@ -18,10 +18,10 @@ export const metadata: Metadata = {
 };
 
 const zones = [
-  { zone: "London & South East", timeframe: "1-2 working days", fee: "£3.99 (free over £30)" },
-  { zone: "Rest of England & Wales", timeframe: "2-4 working days", fee: "£4.99 (free over £30)" },
-  { zone: "Scotland", timeframe: "3-5 working days", fee: "£5.99 (free over £15)" },
-  { zone: "Northern Ireland", timeframe: "3-6 working days", fee: "£5.99 (free over £15)" },
+  { zone: "London & South East", timeframe: "1-2 working days" },
+  { zone: "Rest of England & Wales", timeframe: "2-4 working days" },
+  { zone: "Scotland", timeframe: "3-5 working days" },
+  { zone: "Northern Ireland", timeframe: "3-6 working days" },
 ];
 
 export default function DeliveryPage() {
@@ -30,17 +30,24 @@ export default function DeliveryPage() {
       <SectionHeading
         eyebrow="Shipping"
         heading="Delivery Information"
-        subtext="Where we deliver, how long it takes, and what it costs."
+        subtext="Free UK delivery on all orders, wherever you are in the UK."
         align="left"
       />
 
+      <div className="mt-8 rounded-2xl border border-deep-green/20 bg-deep-green/5 p-6 text-center">
+        <p className="font-heading text-xl text-deep-green">Free UK Delivery on All Orders</p>
+        <p className="mt-1 text-sm text-brown">
+          Delivery is included in every product&apos;s price — there are no separate shipping fees
+          at checkout, regardless of order size.
+        </p>
+      </div>
+
       <div className="mt-10 overflow-x-auto rounded-2xl border border-brown/10 bg-ivory">
-        <table className="w-full min-w-[480px] text-left text-sm">
+        <table className="w-full min-w-[380px] text-left text-sm">
           <thead>
             <tr className="border-b border-brown/10 text-brown/80">
               <th className="px-5 py-3 font-semibold">Zone</th>
               <th className="px-5 py-3 font-semibold">Timeframe</th>
-              <th className="px-5 py-3 font-semibold">Fee</th>
             </tr>
           </thead>
           <tbody>
@@ -48,7 +55,6 @@ export default function DeliveryPage() {
               <tr key={zone.zone} className="border-b border-brown/5 last:border-0">
                 <td className="px-5 py-4 font-semibold text-ink">{zone.zone}</td>
                 <td className="px-5 py-4 text-brown">{zone.timeframe}</td>
-                <td className="px-5 py-4 text-brown">{zone.fee}</td>
               </tr>
             ))}
           </tbody>

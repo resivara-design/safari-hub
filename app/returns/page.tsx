@@ -23,7 +23,7 @@ export default function ReturnsPage() {
 
       <div className="mt-10 flex flex-col gap-6 text-brown">
         <p>
-          At {site.name}, we are committed to providing high-quality African food products.
+          At {site.displayName}, we are committed to providing high-quality African food products.
           Due to the nature of the products we sell, our returns policy is designed to protect
           food safety while ensuring customers are treated fairly.
         </p>
@@ -46,7 +46,7 @@ export default function ReturnsPage() {
           <li>A description of the issue</li>
           <li>Clear photographs of the product and packaging</li>
         </ul>
-        <p>After reviewing your claim, {site.name} will provide either:</p>
+        <p>After reviewing your claim, {site.displayName} will provide either:</p>
         <ul className="flex list-disc flex-col gap-1 pl-5">
           <li>A replacement product, or</li>
           <li>A full refund</li>

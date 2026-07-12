@@ -1,7 +1,7 @@
 const items = [
   {
     label: "FREE UK DELIVERY",
-    subtext: "On orders over £15",
+    subtext: "On all orders",
     icon: "M3 7h11v8H3zM14 10h4l3 3v2h-7zM6.5 19a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM17.5 19a1.5 1.5 0 100-3 1.5 1.5 0 000 3z",
     tint: "text-brown",
   },

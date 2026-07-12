@@ -35,9 +35,11 @@ export const metadata: Metadata = {
     // Applies to every page that sets a plain string title (e.g. "Cart" ->
     // "Cart | Safari Hub Tastebuds"), so the marketing brand shows up
     // consistently across the whole site's tab titles and search results.
-    // site.name ("Safari Hub") stays untouched here on purpose — it's still
-    // used for feed.xml's g:brand, JSON-LD Organization, and emails, so it
-    // can't silently drift from what's already on file with Merchant Center.
+    // site.displayName is now used everywhere customer-facing (feed.xml's
+    // g:brand, JSON-LD, emails) after a Merchant Center misrepresentation
+    // flag — a split identity (Merchant Center/schema saying "Safari Hub"
+    // while the site said "Safari Hub Tastebuds") was a plausible cause.
+    // site.name survives only as the short form used in the mobile header.
     template: `%s | ${site.displayName}`,
   },
   description: site.description,
@@ -59,7 +61,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const organizationJsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: site.name,
+    name: site.displayName,
     url: site.url,
     description: site.description,
     email: site.contactEmail,
@@ -69,7 +71,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const websiteJsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: site.name,
+    name: site.displayName,
     url: site.url,
   };
 

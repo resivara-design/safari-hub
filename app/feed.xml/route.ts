@@ -45,8 +45,13 @@ export async function GET() {
     <g:availability>${availability}</g:availability>
     <g:price>${product.price.toFixed(2)} GBP</g:price>
     <g:condition>new</g:condition>
-    <g:brand>${cdata(site.name)}</g:brand>
+    <g:brand>${cdata(site.displayName)}</g:brand>
     <g:google_product_category>${escapeXml(category)}</g:google_product_category>
+    <g:shipping>
+      <g:country>GB</g:country>
+      <g:service>Standard</g:service>
+      <g:price>0.00 GBP</g:price>
+    </g:shipping>
   </item>`;
     })
     .join("\n");
@@ -54,7 +59,7 @@ export async function GET() {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">
 <channel>
-  <title>${escapeXml(site.name)} Product Feed</title>
+  <title>${escapeXml(site.displayName)} Product Feed</title>
   <link>${escapeXml(site.url)}</link>
   <description>${escapeXml(site.description)}</description>
 ${items}

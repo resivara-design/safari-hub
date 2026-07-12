@@ -86,6 +86,33 @@ export default function ProductPage({ params }: ProductPageProps) {
         ? "https://schema.org/InStock"
         : "https://schema.org/OutOfStock",
       url: `${site.url}/product/${product.slug}`,
+      shippingDetails: {
+        "@type": "OfferShippingDetails",
+        shippingRate: {
+          "@type": "MonetaryAmount",
+          value: "0.00",
+          currency: "GBP",
+        },
+        shippingDestination: {
+          "@type": "DefinedRegion",
+          addressCountry: "GB",
+        },
+        deliveryTime: {
+          "@type": "ShippingDeliveryTime",
+          handlingTime: {
+            "@type": "QuantitativeValue",
+            minValue: 0,
+            maxValue: 1,
+            unitCode: "DAY",
+          },
+          transitTime: {
+            "@type": "QuantitativeValue",
+            minValue: 1,
+            maxValue: 6,
+            unitCode: "DAY",
+          },
+        },
+      },
     },
     ...(reviewCount > 0
       ? {
@@ -175,8 +202,9 @@ export default function ProductPage({ params }: ProductPageProps) {
           <ProductDetailCard label="Storage" value={product.storageInstructions} />
         </div>
         <p className="mt-4 text-sm text-brown/80">
-          As a retailer, we list this information from the product packaging where it&apos;s
-          available to us. Always check the label before consumption, and{" "}
+          {site.displayName} retails this product as a packaged African food item — we do not
+          manufacture it. Ingredients, allergens and storage details above are taken from the
+          product packaging where available to us. Always check the label before consumption, and{" "}
           <Link href="/contact" className="text-deep-green underline">
             contact us
           </Link>{" "}

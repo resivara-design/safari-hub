@@ -49,7 +49,7 @@ ${itemLines}
 Total paid: £${payload.amountTotal.toFixed(2)}`;
 
   const { error } = await resend.emails.send({
-    from: `${site.displayName} Orders <onboarding@resend.dev>`,
+    from: `${site.displayName} Orders <orders@safarihub.uk>`,
     to: site.contactEmail,
     replyTo: payload.customerEmail ?? undefined,
     subject: `New order ${payload.orderId} — £${payload.amountTotal.toFixed(2)}`,
@@ -94,7 +94,7 @@ just reply to this email or contact us at ${site.contactEmail}.
 — ${site.displayName}`;
 
   const { error } = await resend.emails.send({
-    from: `${site.displayName} <onboarding@resend.dev>`,
+    from: `${site.displayName} <orders@safarihub.uk>`,
     to: payload.customerEmail,
     replyTo: site.contactEmail,
     subject: `Your ${site.displayName} order ${payload.orderId} is confirmed`,
@@ -123,7 +123,7 @@ Message:
 ${payload.message}`;
 
   const { error } = await resend.emails.send({
-    from: `${site.displayName} Contact Form <onboarding@resend.dev>`,
+    from: `${site.displayName} Contact Form <orders@safarihub.uk>`,
     to: site.contactEmail,
     replyTo: payload.email,
     subject: `New contact form message from ${payload.name}`,

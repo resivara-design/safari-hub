@@ -23,10 +23,10 @@ plain object — copy an existing entry and edit the fields:
 
 ```ts
 {
-  slug: "curry-powder",        // unique, used in the URL /product/curry-powder
-  name: "Curry Powder",
+  slug: "bay-leaf",             // unique, used in the URL /product/bay-leaf
+  name: "Bay Leaves",
   category: "spices-and-seasoning", // must match a slug in lib/categories.ts
-  price: 4.79,                 // plain number, in GBP
+  price: 2.99,                 // plain number, in GBP
   shortDescription: "...",     // one sentence, shown on product cards
   longDescription: "...",      // 2-3 sentences, shown on the product page
   inStock: true,

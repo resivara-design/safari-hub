@@ -176,20 +176,6 @@ export const products: Product[] = [
     photo: "/images/products/bay-leaf.jpg",
   },
   {
-    slug: "curry-powder",
-    name: "Curry Powder",
-    category: "spices-and-seasoning",
-    price: 2.99,
-    weight: "100g",
-    shortDescription: "A warm, balanced house blend of curry spices.",
-    longDescription:
-      "Our house curry powder blends warm spices in careful balance, built for depth rather than heat. A versatile everyday seasoning for rice, meat and vegetable dishes.",
-    inStock: true,
-    featured: true,
-    image: { colorFrom: "gold", colorTo: "burnt-orange", icon: "jar" },
-    photo: "/images/products/curry-powder.jpg",
-  },
-  {
     slug: "ground-egusi",
     name: "Ground Egusi",
     category: "soup-ingredients",

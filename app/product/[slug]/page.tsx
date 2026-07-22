@@ -7,6 +7,7 @@ import Badge from "@/components/ui/Badge";
 import FreeDeliveryBadge from "@/components/ui/FreeDeliveryBadge";
 import InStockBadge from "@/components/ui/InStockBadge";
 import AddToCartButton from "@/components/product/AddToCartButton";
+import RemindMeButton from "@/components/product/RemindMeButton";
 import ShareButtons from "@/components/product/ShareButtons";
 import ProductReviews from "@/components/product/ProductReviews";
 import ProductGrid from "@/components/product/ProductGrid";
@@ -185,8 +186,9 @@ export default function ProductPage({ params }: ProductPageProps) {
             <FreeDeliveryBadge />
             {product.inStock ? <InStockBadge /> : <Badge tone="orange">Currently Out of Stock</Badge>}
           </div>
-          <div className="mt-2">
+          <div className="mt-2 flex flex-wrap items-center gap-3">
             <AddToCartButton product={product} />
+            <RemindMeButton product={product} />
           </div>
           <div className="mt-2">
             <ShareButtons slug={product.slug} name={product.name} price={product.price} />

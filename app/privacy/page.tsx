@@ -40,6 +40,11 @@ export default function PrivacyPage() {
           <li>
             <strong>Contact form:</strong> your name, email address, and the message you send us.
           </li>
+          <li>
+            <strong>Product reminders:</strong> the product you were viewing, your email address, and
+            the date and time you ticked the consent box, if you use the &quot;Remind Me&quot; button on a
+            product page.
+          </li>
         </ul>
         <p>
           Items you add to your cart before checkout are stored only in your own browser (Local
@@ -78,15 +83,39 @@ export default function PrivacyPage() {
           provider, to the email address you provide at checkout.
         </p>
 
+        <h2 className="font-heading text-2xl text-ink">Product Reminder Emails</h2>
+        <p>
+          If you click &quot;Remind Me&quot; on a product page, we ask for your email address and
+          show an unticked box that says &quot;Email me one reminder about this product.&quot; We only
+          store your details and send anything if you enter a valid email address and actively tick
+          that box — the legal basis for this is your explicit, specific consent (UK GDPR Article
+          6(1)(a)), not general marketing consent.
+        </p>
+        <p>
+          We send exactly one reminder email, roughly a day after you sign up, containing the
+          product&apos;s image, its current price, and a link back to the product. We do not send
+          any further emails about that signup, and we won&apos;t create a reminder — or will
+          cancel one already pending — if the product is no longer available. Every reminder email
+          includes a cancel link, and the same link is also shown on screen immediately after you
+          sign up, in case you change your mind before it&apos;s sent.
+        </p>
+        <p>
+          Reminder records (your email address, the product, and your consent timestamp) are kept
+          for up to 31 days from signup, after which they are automatically deleted. You can cancel
+          a pending reminder at any time using the link described above.
+        </p>
+
         <h2 className="font-heading text-2xl text-ink">How your data is stored securely</h2>
         <p>
           We do not operate our own customer database. Order and payment data lives within
-          Stripe&apos;s systems, and email content passes through Resend to deliver order and
-          contact-form emails — both are established providers with their own security and
+          Stripe&apos;s systems, email content passes through Resend to deliver order,
+          contact-form and reminder emails, and pending product-reminder signups are held in
+          Upstash&apos;s Redis database — all are established providers with their own security and
           compliance programmes. This website is served entirely over HTTPS with modern
-          encryption in transit. Because Stripe and Resend are US-headquartered with global
-          infrastructure, your data may be processed outside the UK; both maintain safeguards
-          (such as Standard Contractual Clauses) recognised under UK GDPR for these transfers.
+          encryption in transit. Because Stripe, Resend and Upstash are US-headquartered with
+          global infrastructure, your data may be processed outside the UK; each maintains
+          safeguards (such as Standard Contractual Clauses) recognised under UK GDPR for these
+          transfers.
         </p>
         <p>
           We retain order data for as long as necessary to fulfil your order and meet our legal
